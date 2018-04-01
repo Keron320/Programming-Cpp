@@ -1,0 +1,17 @@
+﻿'AE2_Project_VS2017.exe' (Win32): Loaded 'C:\Users\Mini-me\Desktop\Assessment 2\DAC416_AE2_Project_VS2017-20180102\Debug\AE2_Project_VS2017.exe'. Symbols loaded.
+'AE2_Project_VS2017.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ntdll.dll'. Cannot find or open the PDB file.
+'AE2_Project_VS2017.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel32.dll'. Cannot find or open the PDB file.
+'AE2_Project_VS2017.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\kernel32.dll'
+'AE2_Project_VS2017.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel32.dll'. Cannot find or open the PDB file.
+'AE2_Project_VS2017.exe' (Win32): Loaded 'C:\Windows\SysWOW64\KernelBase.dll'. Cannot find or open the PDB file.
+'AE2_Project_VS2017.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcp140d.dll'. Cannot find or open the PDB file.
+'AE2_Project_VS2017.exe' (Win32): Loaded 'C:\Windows\SysWOW64\vcruntime140d.dll'. Cannot find or open the PDB file.
+'AE2_Project_VS2017.exe' (Win32): Loaded 'C:\Windows\SysWOW64\vcruntime140d.dll'. Cannot find or open the PDB file.
+'AE2_Project_VS2017.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\vcruntime140d.dll'
+'AE2_Project_VS2017.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ucrtbased.dll'. Cannot find or open the PDB file.
+Error: Could not find 'C:\Users\Mini-me\Desktop\Assessment 2\DAC416_AE2_Project_VS2017-20180102\Debug\AE2_Project.obj'. AE2_Project_VS2017.exe was built with /DEBUG:FASTLINK which requires object files for debugging.
+The thread 0x1a48 has exited with code -1073741510 (0xc000013a).
+The thread 0x1900 has exited with code -1073741510 (0xc000013a).
+The thread 0x1b6c has exited with code -1073741510 (0xc000013a).
+The thread 0x261c has exited with code -1073741510 (0xc000013a).
+The program '[2764] AE2_Project_VS2017.exe' has exited with code -1073741510 (0xc000013a).
