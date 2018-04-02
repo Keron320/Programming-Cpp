@@ -1,0 +1,5 @@
+﻿  main.cpp
+c:\users\keron\desktop\desktop\vs2017_c++\critter_caretaker\crittercaretaker\main.cpp(25): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\keron\desktop\desktop\vs2017_c++\critter_caretaker\crittercaretaker\main.cpp(26): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\keron\desktop\desktop\vs2017_c++\critter_caretaker\crittercaretaker\main.cpp(38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  G2ACalc..vcxproj -> C:\Users\Keron\Desktop\Desktop\VS2017_C++\Critter_Caretaker\CritterCaretaker\Debug\G2Acalc.exe
