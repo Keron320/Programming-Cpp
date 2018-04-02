@@ -1,13 +1,21 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "conio.h"
 #include "cTester.h"
 #include "cMenu.h"
-#include "conio.h"
+#include "cMasterBlock.h"
+
+// Author:Keron Sepp, Year:2017, Project:DAC416 Assessment 1, Viewed Date: 01.04.2018, Available from: github.com/Keron320/Programming-Cpp
 #include "cClearScreen.h"
+
+
+// Author:Dave Cobb, Year:2017, Project:DAC416 Assessment 2, Viewed Date: 01.04.2018, Available from: Solent University.
 #include "cTimer.h"
 
 using namespace std;
+
+
 
 /*
 // function for keyboard inputs
@@ -40,21 +48,18 @@ int main()
 	cClearScreen clearScreen;
 	cMenu mainMenu;
 	cTimer time;
+	cMasterBlock masterBlock;
 
-	time.start();
-	while(1){
 	
-		cout << time.getElapsed_sec() << endl;
-	}
+	
+	masterBlock.printBlock();
 
 	//testing.test("SQUARE 20 10 49 s");
-	
-
-	mainMenu.masterMenu();
+	//mainMenu.masterMenu();
 
 
 	//End message
-	std::cout << "\nYou reached the end of the program, sorry...\nPress any key to exit";
+	//std::cout << "\nYou reached the end of the program, sorry...\nPress any key to exit";
 	_getch();
 	return 0;
 }

@@ -25,6 +25,7 @@ public:
 	void anyKey();
 	//Instructions part of the game
 	void instructionMenu();
+	std::string playerName();
 private:
 	//default menu selection set to 0
 	int choice = { 0 };

@@ -24,7 +24,8 @@ void cMenu::menuSelection()
 		break;
 	case game:if (choice == 1)
 	{
-		std::cout << "New game!" << std::endl;
+		screenWipe.wipeScreen();
+		playerName();
 	}
 		break;
 	case instructions:if (choice == 2)
@@ -124,5 +125,13 @@ void cMenu::instructionMenu()
 	else {
 		std::cout << "\nNo data" << std::endl;
 	}
+}
+
+std::string cMenu::playerName()
+{
+	std::string name;
+	std::cout << "Enter player name: ";
+	std::cin >> name;
+	return name;
 }
 

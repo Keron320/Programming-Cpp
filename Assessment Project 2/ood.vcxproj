@@ -118,13 +118,17 @@
     <ClCompile Include="cClearScreen.cpp" />
     <ClCompile Include="cMenu.cpp" />
     <ClCompile Include="cTimer.cpp" />
+    <ClCompile Include="cUserInterface.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="cMasterBlock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cClearScreen.h" />
     <ClInclude Include="cMenu.h" />
     <ClInclude Include="cTester.h" />
     <ClInclude Include="cTimer.h" />
+    <ClInclude Include="cMasterBlock.h" />
+    <ClInclude Include="cUserInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="cTester.obj" />
