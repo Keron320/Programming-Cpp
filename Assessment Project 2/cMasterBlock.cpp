@@ -18,9 +18,9 @@ void cMasterBlock::printBlock()
 		CONSOLE_SCREEN_BUFFER_INFO info;
 		GetConsoleScreenBufferInfo(handleOut, &info);
 		COORD coord; //block coordination
-		coord.X = 6;
-		coord.Y = 3;
-		std::string pBlock = "X";  //-----
+		coord.X = coordinateX;
+		coord.Y = coordinateY;
+		std::string pBlock = "x";  //-----
 		DWORD d = 0;
 		WriteConsoleOutputCharacter(handleOut, pBlock.c_str(), pBlock.size(), coord, &d);
 		SetConsoleCursorPosition(handleOut, coord);

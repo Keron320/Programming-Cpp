@@ -49,10 +49,10 @@ int main()
 	cMenu mainMenu;
 	cTimer time;
 	cMasterBlock masterBlock;
-
-	
 	
 	masterBlock.printBlock();
+
+
 
 	//testing.test("SQUARE 20 10 49 s");
 	//mainMenu.masterMenu();
