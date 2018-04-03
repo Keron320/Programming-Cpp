@@ -1,0 +1,12 @@
+Thank you for playing my game!
+
+The game is easy to learn but hard to master.
+When the game starts, random objects are popping up on the screen with letters on them.
+Your task is to react to the letters on time by pressing exact same letter on a keyboard.
+If you fail to do so you will lose 1 Health point. Lose them all and the game is over.
+Each correct answer gives you 100 points and speeds up the game.
+
+Play for fun and compete with your friends!
+
+
+
