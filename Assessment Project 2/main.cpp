@@ -5,6 +5,8 @@
 #include "cTester.h"
 #include "cMenu.h"
 #include "cMasterBlock.h"
+#include "cSquareBlock.h"
+#include "cFileManager.h"
 
 // Author:Keron Sepp, Year:2017, Project:DAC416 Assessment 1, Viewed Date: 01.04.2018, Available from: github.com/Keron320/Programming-Cpp
 #include "cClearScreen.h"
@@ -49,13 +51,16 @@ int main()
 	cMenu mainMenu;
 	cTimer time;
 	cMasterBlock masterBlock;
-	
-	masterBlock.printBlock();
+	cSquareBlock squareBlock;
+	cFileManager fileManager;
+
+	fileManager.fileReader();
 
 
-
-	//testing.test("SQUARE 20 10 49 s");
+	//squareBlock.printBlock();
 	//mainMenu.masterMenu();
+	
+
 
 
 	//End message

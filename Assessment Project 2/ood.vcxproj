@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cClearScreen.cpp" />
+    <ClCompile Include="cFileManager.cpp" />
     <ClCompile Include="cMenu.cpp" />
     <ClCompile Include="cSquareBlock.cpp" />
     <ClCompile Include="cTimer.cpp" />
@@ -125,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cClearScreen.h" />
+    <ClInclude Include="cFileManager.h" />
     <ClInclude Include="cMenu.h" />
     <ClInclude Include="cSquareBlock.h" />
     <ClInclude Include="cTester.h" />

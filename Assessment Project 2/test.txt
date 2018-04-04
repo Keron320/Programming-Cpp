@@ -1,5 +1,4 @@
-SQUARE 20 10 49 s
-L 9 30 77 L
+
 T 15 22 42 
 BAR 30 7 95 178
 TEXT 34 8 32 High Score
