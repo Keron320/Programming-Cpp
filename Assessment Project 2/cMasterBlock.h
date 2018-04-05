@@ -18,7 +18,7 @@ public:
 protected:
 	unsigned int coordinateX = { 0 };	//Row
 	unsigned int coordinateY = { 0 };	//Column
-	unsigned int colour = 0;
+	unsigned int colour = { 0 };
 	std::string name;					//block name
 	char text;							//text on block
 };

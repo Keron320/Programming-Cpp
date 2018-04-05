@@ -59,7 +59,7 @@ int main()
 
 	//squareBlock.printBlock();
 	//mainMenu.masterMenu();
-	
+	testing.test("SQUARE 20 10 49 s");
 
 
 

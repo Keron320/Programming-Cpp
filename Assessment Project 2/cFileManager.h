@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <vector>
 
 
 class cFileManager
