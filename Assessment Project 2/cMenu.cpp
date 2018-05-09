@@ -13,6 +13,7 @@ cMenu::~cMenu()
 
 // class to wipe screen anywhere inside cMenu.cpp
 cClearScreen screenWipe;
+cGame gameplay;
 
 // Switch cases when "choice" changes.
 void cMenu::menuSelection()
@@ -129,9 +130,17 @@ void cMenu::instructionMenu()
 
 std::string cMenu::playerName()
 {
-	std::string name;
+	std::string pName;
 	std::cout << "Enter player name: ";
-	std::cin >> name;
-	return name;
+	std::cin >> pName;
+	std::cout << "\nPlease press any key to start the game!";
+	_getch();
+	// Wipes screen after entering the data
+	screenWipe.wipeScreen();
+	//Starts cGame class and runs the game
+	gameplay.game();
+
+
+	return pName;
 }
 

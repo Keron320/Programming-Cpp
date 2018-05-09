@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <conio.h>
+#include "cGame.h"
 
 
 class cMenu

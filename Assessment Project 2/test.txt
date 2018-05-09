@@ -1,9 +1,11 @@
 
+SQUARE 20 10 49 s
+L 9 30 77 L
 T 15 22 42 
-BAR 30 7 95 178
+BAR 30 7 95 78
 TEXT 34 8 32 High Score
-L 20 20 0f @
+L 20 20 07 @
 // overlapped SQUARE blocks
-SQUARE 30 12 26 1
-SQUARE 30 10 3f 2
+SQUARE 30 12 26 1 skips this line
+SQUARE 30 10 63 2
 TEXT 34 8 32 This is the last line
