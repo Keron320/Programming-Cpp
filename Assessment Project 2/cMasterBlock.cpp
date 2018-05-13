@@ -25,4 +25,14 @@ int cMasterBlock::returnY(int y)
 	return coordinateY;
 }
 
+int cMasterBlock::returnC(int c)
+{
+	colour = c;
+	return colour;
+}
 
+std::string cMasterBlock::returnCharacter(std::string character)
+{
+	blockName = character;
+	return blockName;
+}

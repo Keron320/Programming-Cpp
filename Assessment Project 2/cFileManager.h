@@ -24,7 +24,8 @@ public:
 	// reads through the line to return row value
 	int getRow(int x, int i);
 	int getColumn(int x, int i);
-;
+	int getColour(int x, int i);
+	std::string getCharacter(int x, int i);
 
 };
 

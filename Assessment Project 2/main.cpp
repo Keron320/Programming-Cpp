@@ -8,6 +8,7 @@
 #include "cSquareBlock.h"
 #include "cFileManager.h"
 #include "cGame.h"
+#include <ctime>
 
 // Author:Keron Sepp, Year:2017, Project:DAC416 Assessment 1, Viewed Date: 01.04.2018, Available from: github.com/Keron320/Programming-Cpp
 #include "cClearScreen.h"
@@ -18,33 +19,6 @@
 
 using namespace std;
 
-
-
-
-//// function for keyboard inputs
-//void keyboardInput(char keyPress = 0) {
-//	// Press ESC to stop the loop
-//	while (keyPress != 27) {
-//		// Registers keyboard hit
-//		if (_kbhit())
-//		{
-//			// _getch() appoints _kbhit to keyPress variable
-//			keyPress = _getch();
-//			// If 'ENTER' is pressed
-//			if (keyPress == 13)
-//			{
-//				std::cout << "Hello friend";
-//			}
-//			// Display this message if no correct keys is pressed
-//			else
-//			{
-//				cout << "you pressed an invalid key" << endl;
-//			}
-//		}
-//	}
-//}
-
-
 const std::string TestFileName{ "test.txt" };
 
 int main()
@@ -54,106 +28,75 @@ int main()
 	cClearScreen console;
 	cGame gameplay;
 	cMasterBlock block;
+	cMasterBlock testBlock;
 	cSquareBlock square;
 	cMenu menu;
+	srand((unsigned int)time(NULL));
 
-
-	//while (reader.fileReader())
-	//{
-	//	// construct a shape from a file
-	//	cMasterBlock shape { reader.getNextLine() };
-	//	//clear the screen
-	//	console.wipeScreen();
-	//	//display shape just created
-	//	shape.printBlock();
-	//	//test the shape
-	//	//bool success = tester.test(shape.getRawText());
-	//}
-	//// std::cout << std::boolalpha << success;
-	////_getch();
-
-
-	// menu.masterMenu();
 
 	// TEST GAME STARTS HERE
-
-/* TESTING FOR READING ALL THE LINES
-
 	for (int loopInt = 1; loopInt < reader.lineCounter(); loopInt++) {
 
-		// Reads the line to test if it is working
-		//	reader.readLine(reader.lineCounter());
 		// Returns the name of the line(BLOCK or BAR or so on)
 		reader.getName(reader.lineCounter(), loopInt);
+
 
 		// Returns the row of given line
 		reader.getRow(reader.lineCounter(), loopInt);
 		// Passes the returned value to return function
-		block.returnX(reader.getRow(reader.lineCounter(), loopInt));
+		testBlock.returnX(reader.getRow(reader.lineCounter(), loopInt));
 
 		// Returns the column of given line
 		reader.getColumn(reader.lineCounter(), loopInt);
 		// Passes the returned value to return function
-		block.returnY(reader.getRow(reader.lineCounter(), loopInt));
+		testBlock.returnY(reader.getRow(reader.lineCounter(), loopInt));
 
+		// Returns the colour of given line
+		reader.getColour(reader.lineCounter(), loopInt);
+		// Passes the returned value to return function
+		testBlock.returnC(reader.getColour(reader.lineCounter(), loopInt));
 
-		//if (reader.getName(reader.lineCounter(), loopInt) == "SQUARE") {
-		//	square.printSquare(block.coordinateX, block.coordinateY);
-		//}
+		// Returns the character of given line
+		reader.getCharacter(reader.lineCounter(), loopInt);
+		// Passes the returned value to return function
+		testBlock.returnCharacter(reader.getCharacter(reader.lineCounter(), loopInt));
 
+		
+		//Uncomment gameColours to test colors.
+		//testBlock.gameColours = true;  
+		if (reader.getName(reader.lineCounter(), loopInt) == "SQUARE") {
+			square.printSquare(testBlock.coordinateX, testBlock.coordinateY, testBlock.colour, testBlock.blockName, testBlock.gameColours);
+		}
+		else if ((reader.getName(reader.lineCounter(), loopInt) == "SQUARE") && (reader.getCharacter(reader.lineCounter(), loopInt) == "1")) {
+			loopInt += 1;
+		}
 
-		std::cout << reader.getName(reader.lineCounter(), loopInt) << std::endl;
+		else if (reader.getName(reader.lineCounter(), loopInt) == "BAR") {
+			square.printBar(testBlock.coordinateX, testBlock.coordinateY, testBlock.colour, testBlock.blockName, testBlock.gameColours);
+		}
+		else if (reader.getName(reader.lineCounter(), loopInt) == "T") {
+			square.printT(testBlock.coordinateX, testBlock.coordinateY, testBlock.colour, testBlock.blockName, testBlock.gameColours);
+		}
 
+		if (reader.getName(reader.lineCounter(), loopInt) == "//") { // Custom Block
+			loopInt++;
+		}
 
-		//else if (reader.getName(reader.lineCounter(), loopInt) == "BAR") {
-		//	square.printBar(block.coordinateX, block.coordinateY);
-		//}
+		else if (reader.getName(reader.lineCounter(), loopInt) == "L") {
+			square.printL(testBlock.coordinateX, testBlock.coordinateY, testBlock.colour, testBlock.blockName, testBlock.gameColours);
+		}
+		else if (reader.getName(reader.lineCounter(), loopInt) == "TEXT") {
+			square.printTEXT(testBlock.coordinateX, testBlock.coordinateY, testBlock.colour, testBlock.blockName, testBlock.gameColours);
+		}
+
+		bool test(std::string& name);
+		
+		_getch();
+		// Clears the screen
+		console.wipeScreen();
 	}
 
-*/
-
-//	// Reading random lines
-//#include <stdlib.h>
-//#include <time.h>
-//
-//	int randomNumber = 0;
-//	srand(time(NULL));
-//	//Random number from 1 to as many lines test.txt has
-//	randomNumber = rand() % reader.lineCounter() + 1;
-//	// int loopInt = randomnumber means to only read the random line and get the data
-//	int loopInt = randomNumber;
-//
-//		// Reads the line to test if it is working
-//		//	reader.readLine(reader.lineCounter());
-//		// Returns the name of the line(BLOCK or BAR or so on)
-//		reader.getName(reader.lineCounter(), loopInt);
-//
-//		// Returns the row of given line
-//		reader.getRow(reader.lineCounter(), loopInt);
-//		// Passes the returned value to return function
-//		block.returnX(reader.getRow(reader.lineCounter(), loopInt));
-//
-//		// Returns the column of given line
-//		reader.getColumn(reader.lineCounter(), loopInt);
-//		// Passes the returned value to return function
-//		block.returnY(reader.getRow(reader.lineCounter(), loopInt));
-//
-//
-//		if (reader.getName(reader.lineCounter(), loopInt) == "SQUARE") {
-//			square.printSquare(block.coordinateX, block.coordinateY);
-//		}
-//
-//
-//		std::cout << reader.getName(reader.lineCounter(), loopInt) << std::endl;
-//
-//
-		//else if (reader.getName(reader.lineCounter(), loopInt) == "BAR") {
-		//	square.printBar(block.coordinateX, block.coordinateY);
-		//}
-
-
-		// To prevent the for loop being an endless loop
-
+	// Game starts
 	menu.masterMenu();
 
 
@@ -161,36 +104,3 @@ int main()
 	return 0;
 	
 }
-
-//for (int loopInt = 1; loopInt < reader.lineCounter(); loopInt++) {
-//
-//	 Reads the line to test if it is working
-//	 reader.readLine(reader.lineCounter());
-//	 Returns the name of the line (BLOCK or BAR or so on)
-//	reader.getName(reader.lineCounter(), loopInt);
-//
-//	// Returns the row of given line
-//	reader.getRow(reader.lineCounter(), loopInt);
-//	// Passes the returned value to return function
-//	block.returnX(reader.getRow(reader.lineCounter(), loopInt));
-//
-//	// Returns the column of given line
-//	reader.getColumn(reader.lineCounter(), loopInt);
-//	// Passes the returned value to return function
-//	block.returnY(reader.getRow(reader.lineCounter(), loopInt));
-//
-//
-//	if (reader.getName(reader.lineCounter(), loopInt) == "SQUARE") {
-//		square.printSquare(block.coordinateX, block.coordinateY);
-//	}
-//
-//	else if (reader.getName(reader.lineCounter(), loopInt) == "BAR") {
-//		square.printBar(block.coordinateX, block.coordinateY);
-//	}
-//
-//
-//}
-//
-//
-//
-//}
