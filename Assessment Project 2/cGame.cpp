@@ -114,7 +114,7 @@ void cGame::keyPress()
 		}
 		else
 		{
-			std::cout << "you pressed an invalid key" << std::endl;
+			std::cout << "you pressed an invalid key                     " << std::endl;
 		}
 	}
 }
@@ -142,6 +142,7 @@ void cGame::game()
 			abuseBlocker = true;	// prevents player from spamming the enter key or holding it down
 			timerSpawn.start();
 			// Display block
+			std::cout <<"Score: " <<score <<"               "<< "Lives: "<< lives << std::endl;
 			while (timerSpawn.getElapsed_sec() <= timeRestriction && keyPressed == false)
 			{
 				abuseBlocker = false;

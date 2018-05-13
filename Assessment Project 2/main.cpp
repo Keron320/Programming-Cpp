@@ -89,9 +89,53 @@ int main()
 			square.printTEXT(testBlock.coordinateX, testBlock.coordinateY, testBlock.colour, testBlock.blockName, testBlock.gameColours);
 		}
 
-		bool test(std::string& name);
+		// Testing using the provided testing class ( Not pretty )
+		for (int loopInt = 1; loopInt < reader.lineCounter(); loopInt++) {
+			std::cout << "Testing completed if you see 1, then everything is all right!\n";
+			if (loopInt = 1){
+			bool test("SQUARE 20 10 49 s");
+			std::cout << test;
+			}
+			if (loopInt = 2) {
+				bool test("L 9 30 77 L");
+				std::cout << test;
+			}
+			if (loopInt = 3) {
+				bool test("T 15 22 42 ");
+				std::cout << test;
+			}
+			if (loopInt = 4) {
+				bool test("BAR 30 7 95 78");
+				std::cout << test;
+			}
+			if (loopInt = 5) {
+				bool test("TEXT 34 8 32 High Score");
+				std::cout << test;
+			}
+			if (loopInt = 6) {
+				bool test("L 20 20 07 @");
+				std::cout << test;
+			}
+			if (loopInt = 7) {
+				bool test("// overlapped SQUARE blocks");
+				std::cout << test;
+			}
+			if (loopInt = 8) {
+				bool test("SQUARE 30 12 26 1 skips this line");
+				std::cout << test;
+			}
+			if (loopInt = 9) {
+				bool test("SQUARE 30 10 63 2");
+				std::cout << test;
+			}
+			if (loopInt = 10) {
+				bool test("TEXT 34 8 32 This is the last line");
+				std::cout << test;
+			}
+		}
 		
-		_getch();
+		// remove comment from _getch() to test everyting with visuals!
+		//_getch();
 		// Clears the screen
 		console.wipeScreen();
 	}

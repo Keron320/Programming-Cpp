@@ -111,7 +111,9 @@ void cSquareBlock::printBar(int coordinateX, int coordinateY, int colour, std::s
 	{
 		WORD attribute;
 
-		attribute = SetConsoleTextAttribute(handleOut, FOREGROUND_GREEN | FOREGROUND_BLUE);
+		if (txtColour = 1) { attribute = FOREGROUND_INTENSITY | FOREGROUND_RED; };
+		if (txtColour = 2) { attribute = FOREGROUND_INTENSITY | FOREGROUND_BLUE; };
+		if (txtColour = 49) { attribute = FOREGROUND_INTENSITY | FOREGROUND_GREEN; };
 
 		WriteConsoleOutputAttribute(handleOut, &attribute, 1, coord, &d);
 		WriteConsoleOutputAttribute(handleOut, &attribute, 1, coord2, &d);
@@ -172,7 +174,7 @@ void cSquareBlock::printT(int coordinateX, int coordinateY, int colour, std::str
 	{
 		WORD attribute;
 
-		attribute = SetConsoleTextAttribute(handleOut, FOREGROUND_GREEN | FOREGROUND_BLUE);
+		attribute = FOREGROUND_RED | FOREGROUND_BLUE;
 
 		WriteConsoleOutputAttribute(handleOut, &attribute, 1, coord, &d);
 		WriteConsoleOutputAttribute(handleOut, &attribute, 1, coord2, &d);
@@ -233,7 +235,7 @@ void cSquareBlock::printL(int coordinateX, int coordinateY, int colour, std::str
 	{
 		WORD attribute;
 
-		attribute = SetConsoleTextAttribute(handleOut, FOREGROUND_GREEN | FOREGROUND_BLUE);
+		attribute = FOREGROUND_GREEN | FOREGROUND_BLUE;
 
 		WriteConsoleOutputAttribute(handleOut, &attribute, 1, coord, &d);
 		WriteConsoleOutputAttribute(handleOut, &attribute, 1, coord2, &d);
@@ -278,7 +280,7 @@ void cSquareBlock::printTEXT(int coordinateX, int coordinateY, int colour, std::
 	{
 		WORD attribute;
 
-		attribute = SetConsoleTextAttribute(handleOut, FOREGROUND_GREEN | FOREGROUND_BLUE);
+		attribute = FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE,
 
 		WriteConsoleOutputAttribute(handleOut, &attribute, 1 , coord, &d);
 	}
