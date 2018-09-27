@@ -2,10 +2,9 @@
 
 
 
-Hero::Hero()
+Hero::Hero(int xpos, int ypos, int lives, std::string name)
 {
 }
-
 
 Hero::~Hero()
 {

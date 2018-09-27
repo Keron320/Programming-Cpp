@@ -1,9 +1,9 @@
 #pragma once
-
+#include "Creature.h"
 class Monster : public Creature
 {
 public:
-	Monster();
+	Monster(int xpos, int ypos, std::string name);
 	~Monster();
 };
 

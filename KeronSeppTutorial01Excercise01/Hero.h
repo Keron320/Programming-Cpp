@@ -1,8 +1,15 @@
 #pragma once
-class Hero
+#include "Creature.h"
+class Hero : public Creature
 {
+protected:
+	int score;
+	int lives;
+	
+
 public:
-	Hero();
+
+	Hero(int xpos, int ypos, int lives, std::string name);
 	~Hero();
 };
 
