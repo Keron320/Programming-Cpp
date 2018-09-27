@@ -4,7 +4,7 @@
 
 class Creature
 {
-private:
+protected:
 	int m_xpos;
 	int m_ypos;
 	std::string m_name;
