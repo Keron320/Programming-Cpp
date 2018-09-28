@@ -1,0 +1,5 @@
+﻿1>------ Build started: Project: ood, Configuration: Debug Win32 ------
+1>cFileManager.cpp
+1>LINK : fatal error LNK1168: cannot open C:\Users\Keron\OneDrive - Southampton Solent University\OOD ASSESSMENT\ood\Debug\ood.exe for writing
+1>Done building project "ood.vcxproj" -- FAILED.
+========== Build: 0 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========
