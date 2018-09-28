@@ -10,7 +10,6 @@ Creature::Creature(int xpos, int ypos, std::string name)
 	m_ypos = ypos;
 	//Name of the creature
 	m_name = name;
-	
 }
 
 void Creature::display()
