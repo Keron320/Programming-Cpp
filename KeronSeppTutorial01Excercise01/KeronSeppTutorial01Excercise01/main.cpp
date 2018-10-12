@@ -1,7 +1,7 @@
 /*
 filename: main.cpp
 Author: Keron Sepp
-Date 26/09/18
+Date 26/09/18	 
 Project: Excercise 01 from Tutorial 01 (Computer Games Programming unit)
 */
 
@@ -10,12 +10,73 @@ Project: Excercise 01 from Tutorial 01 (Computer Games Programming unit)
 #include "Creature.h"
 #include "Hero.h"
 #include "Monster.h"
+#include "Prop.h"
 
 using namespace std;
 
+Prop myProp;
+Prop myProp2;
+Prop myProp3;
+
+void propDisplay(Prop* myProp)
+{
+	//Set all the stuff
+	myProp->setHitpoints(100);
+	myProp->setMaxHitPoints(120);
+	myProp->setName("Chair");
+
+	//Get all the stuff
+	myProp->getHitpoints();
+	myProp->getMaxHitPoints();
+	myProp->getName();
+
+	//Display all the stuff
+	myProp->displayDetails();
+}
+
+void propDisplay2(Prop myProp2)
+{
+	//Set all the stuff
+	myProp2.setHitpoints(100);
+	myProp2.setMaxHitPoints(120);
+	myProp2.setName("Chair");
+
+	//Get all the stuff
+	myProp2.getHitpoints();
+	myProp2.getMaxHitPoints();
+	myProp2.getName();
+
+	//Display all the stuff
+	myProp2.displayDetails();
+}
+
+void propDisplay3(Prop myProp3)
+{
+	//Set all the stuff
+	myProp3.setHitpoints(100);
+	myProp3.setMaxHitPoints(120);
+	myProp3.setName("Chair");
+
+	//Get all the stuff
+	myProp3.getHitpoints();
+	myProp3.getMaxHitPoints();
+	myProp3.getName();
+
+	//Display all the stuff
+	myProp3.displayDetails();
+}
 
 int main() {
+	cout << myProp.getName() << endl;
+	
+	propDisplay(&myProp);
+	cout << myProp.getName() << endl;
+	//propDisplay(myProp2);
 
+	//propDisplay(myProp3);
+
+
+	/*
 	//Creating two creatures
 	Creature Creature1(4, 5, "Donkey");
 	Creature Creature2(5, 2, "Duck");
@@ -31,26 +92,11 @@ int main() {
 	Monster1.chase(&Hero1);
 	Monster1.display();
 	Hero1.display();
+
+
 	}
+	*/
 
-/*
-	//Displaying the original values ( should be 0 and 0 and name)
-	Creature1.display();
-	Creature2.display();
-
-	//Setting creature 1 position
-	Creature1.setX(10);
-	Creature1.setY(15);
-
-	//Setting creature 2 position
-	Creature2.setX(18);
-	Creature2.setY(19);
-
-	//Displaying the updated values
-	Creature1.display();
-	Creature2.display();
-*/	
-	
 
 	_getch();
 	return 0;

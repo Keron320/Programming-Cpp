@@ -1,0 +1,9 @@
+﻿  Hero.cpp
+u:\computer games programming\programming-cpp-master\programming-cpp-master\keronsepptutorial01excercise01\hero.h(2): fatal error C1083: Cannot open include file: 'Creature.h': No such file or directory
+  Creature.cpp
+  main.cpp
+u:\computer games programming\programming-cpp-master\programming-cpp-master\keronsepptutorial01excercise01\keronsepptutorial01excercise01\main.cpp(11): fatal error C1083: Cannot open include file: 'Hero.h': No such file or directory
+  Monster.cpp
+u:\computer games programming\programming-cpp-master\programming-cpp-master\keronsepptutorial01excercise01\monster.h(2): fatal error C1083: Cannot open include file: 'Creature.h': No such file or directory
+  Prop.cpp
+  Generating Code...

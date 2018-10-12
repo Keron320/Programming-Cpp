@@ -99,6 +99,11 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>U:\Computer Games Programming\Programming-Cpp-master\Programming-Cpp-master\KeronSeppTutorial01Excercise01\KeronSeppTutorial01Excercise01;U:\Computer Games Programming\Programming-Cpp-master\Programming-Cpp-master\KeronSeppTutorial01Excercise01;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="keronsepptutorial01excercise01\Creature.cpp" />
