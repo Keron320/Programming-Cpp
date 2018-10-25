@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Keron Sepp SDL Default", "Keron Sepp SDL Default.vcxproj", "{663F3D03-2775-4C19-B889-9C11F3AC1D72}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Keron_Sepp_SDL_Default", "Keron_Sepp_SDL_Default.vcxproj", "{663F3D03-2775-4C19-B889-9C11F3AC1D72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {1D4A9721-2984-441E-BCAF-3507FC021117}
+		SolutionGuid = {66FA7C26-18A7-4225-A92B-372A59B4F77C}
 	EndGlobalSection
 EndGlobal

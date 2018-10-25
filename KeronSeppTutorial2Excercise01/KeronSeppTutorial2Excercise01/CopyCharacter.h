@@ -5,10 +5,9 @@ class CopyCharacter
 {
 
 public:
-	CopyCharacter() {
-	
-		Prop prop;
-	}
+	CopyCharacter();
+
+	Prop prop;
 
 	~CopyCharacter();
 };
