@@ -68,11 +68,42 @@ void propDisplay3(Prop myProp3)
 	myProp3.displayDetails();
 }
 
+void UpdatePropDetailsCopy(Prop p, int hp)
+{
+	p.setHitpoints(hp);
+}
+
+void UpdatePropDetailsPointer(Prop* p, int hp)
+{
+	p->setHitpoints(hp);
+}
+
+
 int main() {
-	cout << myProp.getName() << endl;
-	
+	Prop prop1;
+	Prop prop2;
+
+	CopyCharacter copyChar("copy");
+	PointerCharacter* pointChar = new PointerCharacter("pointer");
+
+	//print prop details
+	prop1.displayDetails();
+
+	//update copy.prop
+	UpdatePropDetailsPointer(&prop1, 100);
+	//print again
+	prop1.displayDetails();
+	//update copy.prop
+	UpdatePropDetailsCopy(prop1, 100);
+	//print again
+	prop1.displayDetails();
+
+
+
+	/*cout << myProp.getName() << endl;
+
 	propDisplay(&myProp);
-	cout << myProp.getName() << endl;
+	cout << myProp.getName() << endl;*/
 
 
 
@@ -81,26 +112,36 @@ int main() {
 	//propDisplay(myProp3);
 
 
-	/*
+
 	//Creating two creatures
 	Creature Creature1(4, 5, "Donkey");
 	Creature Creature2(5, 2, "Duck");
 
-	Hero Hero1(19, 2, 1, "Hero");
-	Monster Monster1(2, 20,"Bob the monster");
+	Hero Hero1(19, 2, 3, "Hero");
+	Monster Monster1(2, 20, "Bob the monster");
 
 	//Play loop until hero is eaten
-	while(Monster1.eaten(&Hero1) == false)
+	while (Monster1.eaten(&Hero1) == false && Hero1.getLives() != 0)
 	{
-	Monster1.display();
-	Hero1.display();
-	Monster1.chase(&Hero1);
-	Monster1.display();
-	Hero1.display();
+		Monster1.display();
+		Hero1.display();
+		Monster1.chase(&Hero1);
+		Monster1.display();
+		Hero1.display();
 
+		if (Monster1.eaten(&Hero1) == true && Hero1.getLives() != 0)
+		{
+			//Decrease hp by 1 when eaten and HP is not 0
+			Hero1.setLives(Hero1.getLives() - 1);
+			//New Coordinates
+			Hero1.setX(13);
+			Hero1.setY(15);
+			
+		}
 
 	}
-	*/
+
+
 
 
 	_getch();

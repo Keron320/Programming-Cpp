@@ -2,8 +2,9 @@
 
 
 
-PointerCharacter::PointerCharacter()
+PointerCharacter::PointerCharacter(string name)
 {
+	Name = name;
 }
 
 

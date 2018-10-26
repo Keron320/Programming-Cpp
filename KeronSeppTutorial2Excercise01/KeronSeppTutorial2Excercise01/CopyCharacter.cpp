@@ -2,9 +2,10 @@
 
 
 
-CopyCharacter::CopyCharacter()
+CopyCharacter::CopyCharacter(std::string _name)
 {
-	
+	prop = new Prop();
+	name = _name;
 }
 
 
