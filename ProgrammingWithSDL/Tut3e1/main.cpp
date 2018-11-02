@@ -1,11 +1,19 @@
 #include "SDL.h"
 #undef main
 
-void main(void)
-{
-	//start up
-	SDL_Init(SDL_INIT_EVERYTHING);
+#include "Game.h"
 
-	//clean up
-	SDL_Quit();
+int main(int argc, char* argv[])
+{
+	Game* game = new Game(); //Create a new game object
+
+	if (game)
+	{
+		game->SetDisplayColour();	//set and show our coloured display;
+		delete game;				// Clean up
+		game = nullptr;				
+	}
+
+	return 0;						//Exit nicely
+
 }
