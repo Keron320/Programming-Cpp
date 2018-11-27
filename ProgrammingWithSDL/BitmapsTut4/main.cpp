@@ -43,7 +43,7 @@ int main()
 			}
 
 			game->SetDisplayColour(r, g, b, a); // set our colour
-		
+			game->Update();
 
 		}
 
