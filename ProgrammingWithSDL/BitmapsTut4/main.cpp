@@ -17,17 +17,19 @@ int main()
 	if (game && input)
 	{
 		//declare and init variables used for colour of the background
-		Uint8 r = 128, g = 128, b = 128, a = 255;
+		Uint8 r = 0, g = 0, b = 0, a = 255;
 
 		//check keys pressed to update variable
 		while (!input->KeyIsPressed(KEY_ESCAPE))
 		{
+			//Update when getting input
 			input->Update();
-
+			
 			//incrase r
 			if (input->KeyIsPressed(KEY_R))
 			{
 				if (++r > 255) r = 0;
+				
 			}
 
 			//incrase g

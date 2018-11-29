@@ -9,14 +9,9 @@ Game2::Game2()
 {
 	m_Window = nullptr;
 	m_Renderer = nullptr;
-
-
-
-
+	   	 
 	// start up
 	SDL_Init(SDL_INIT_VIDEO);
-
-
 
 	// create the window
 	m_Window = SDL_CreateWindow(
@@ -54,10 +49,7 @@ Game2::Game2()
 	m_monster = new Bitmap(m_Renderer, "assets/monster.bmp", 100, 100); // 04-01
 	m_monsterTrans = new Bitmap(m_Renderer, "assets/monsterTrans.bmp", 200, 100); // 04-01
 	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 100, true); // 04-01
-
-
-
-	
+	   
 }
 
 
@@ -100,14 +92,12 @@ void Game2::Update(void)
 	m_monsterTrans->draw();
 	m_monsterTransKeyed->draw();
 
+	
 	//showDrawing
-
 	SDL_RenderPresent(m_Renderer);
 
 	//pause for 1/60th sec
 	SDL_Delay(16); // Delay for 16 millisec
-
-
 }
 
 

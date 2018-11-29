@@ -63,6 +63,16 @@ void Bitmap::draw()
 		SDL_Rect destRect = { m_x, m_y, m_pbitmapSurface->w, m_pbitmapSurface->h };
 		SDL_RenderCopy(m_pRenderer, m_pbitmapTexture, NULL, &destRect);
 	}
-
 }
-	
+
+void Bitmap::getPos()
+{
+	// Don't do anything right now
+}
+
+void Bitmap::setPos()
+{
+	// move x by 1
+	m_x = m_x + 1;
+}
+
