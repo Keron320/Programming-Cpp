@@ -31,6 +31,18 @@ void Input::Update(void)
 			case SDLK_b:
 				m_keysPressed[KEY_B] = true;
 				break;
+			case SDLK_LEFT:
+				m_keysPressed[KEY_LEFT] = true;
+				break;
+			case SDLK_RIGHT:
+				m_keysPressed[KEY_RIGHT] = true;
+				break;
+			case SDLK_UP:
+				m_keysPressed[KEY_UP] = true;
+				break;
+			case SDLK_DOWN:
+				m_keysPressed[KEY_DOWN] = true;
+				break;
 			}
 		}
 
@@ -49,6 +61,18 @@ void Input::Update(void)
 				break;
 			case SDLK_b:
 				m_keysPressed[KEY_B] = false;
+				break;
+			case SDLK_LEFT:
+				m_keysPressed[KEY_LEFT] = false;
+				break;
+			case SDLK_RIGHT:
+				m_keysPressed[KEY_RIGHT] = false;
+				break;
+			case SDLK_UP:
+				m_keysPressed[KEY_UP] = false;
+				break;
+			case SDLK_DOWN:
+				m_keysPressed[KEY_DOWN] = false;
 				break;
 			}
 		}

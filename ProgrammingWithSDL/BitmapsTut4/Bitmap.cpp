@@ -65,14 +65,30 @@ void Bitmap::draw()
 	}
 }
 
-void Bitmap::getPos()
-{
-	// Don't do anything right now
-}
-
 void Bitmap::setPos()
 {
-	// move x by 1
-	m_x = m_x + 1;
+	// m_x = m_x + 10;
+}
+
+//Move bitmap Left
+void Bitmap::moveLeft()
+{
+	m_x = m_x - 15;
+}
+
+//Move bitmap Right
+void Bitmap::moveRight()
+{
+	m_x = m_x + 15;
+}
+//Move bitmap Down
+void Bitmap::moveDown()
+{
+	m_y = m_y + 15;
+}
+//Move bitmap Up
+void Bitmap::moveUp()
+{
+	m_y = m_y - 15;
 }
 

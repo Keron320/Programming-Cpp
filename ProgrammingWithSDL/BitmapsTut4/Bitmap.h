@@ -24,7 +24,12 @@ public:
 
 	void draw();
 
-	void getPos();
 	void setPos();
+
+	//Bitmap control
+	void moveLeft();
+	void moveRight();
+	void moveUp();
+	void moveDown();
 };
 

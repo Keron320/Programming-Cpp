@@ -124,3 +124,34 @@ void Game2::SetDisplayColour(int R, int G, int B, int A)
 		SDL_Delay(100); //Delay takes millisecs
 	}
 }
+
+void Game2::getPos()
+{
+}
+
+void Game2::setPos()
+{
+	//m_monster->setPos();
+}
+
+//Movement
+void Game2::moveLeft()
+{
+	m_monster->moveLeft();
+}
+
+void Game2::moveRight()
+{
+	m_monster->moveRight();
+}
+
+void Game2::moveUp()
+{
+	m_monster->moveUp();
+}
+
+void Game2::moveDown()
+{
+	m_monster->moveDown();
+}
+

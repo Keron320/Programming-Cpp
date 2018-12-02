@@ -17,7 +17,7 @@ int main()
 	if (game && input)
 	{
 		//declare and init variables used for colour of the background
-		Uint8 r = 0, g = 0, b = 0, a = 255;
+		Uint8 r = 128, g = 128, b = 128, a = 255;
 
 		//check keys pressed to update variable
 		while (!input->KeyIsPressed(KEY_ESCAPE))
@@ -25,11 +25,30 @@ int main()
 			//Update when getting input
 			input->Update();
 			
-			//incrase r
+			if (input->KeyIsPressed(KEY_RIGHT))
+			{
+				game->moveRight();
+			}
+			if (input->KeyIsPressed(KEY_LEFT))
+			{
+				game->moveLeft();
+			}
+			if (input->KeyIsPressed(KEY_DOWN))
+			{
+				game->moveDown();
+			}
+			if (input->KeyIsPressed(KEY_UP))
+			{
+				game->moveUp();
+			}
+
+			//Changing colours with keys
+			/*
+				//incrase r
 			if (input->KeyIsPressed(KEY_R))
 			{
 				if (++r > 255) r = 0;
-				
+				game->setPos();
 			}
 
 			//incrase g
@@ -43,6 +62,7 @@ int main()
 			{
 				if (++b > 255) b = 0;
 			}
+			*/
 
 			game->SetDisplayColour(r, g, b, a); // set our colour
 			game->Update();

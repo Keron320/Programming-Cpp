@@ -27,5 +27,16 @@ public:
 	void Update(void);
 
 	void SetDisplayColour(int R, int G, int B, int A);
+
+	// To obtain the bitmap position and to set one
+	void getPos();
+	void setPos();
+
+	//Bitmap control
+	void moveLeft();
+	void moveRight();
+	void moveUp();
+	void moveDown();
+
 };
 
