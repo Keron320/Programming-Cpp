@@ -1,7 +1,9 @@
 #pragma once
-
+#include <string>
 #include <SDL.h>
+#include "SDL_ttf.h"
 #include <stdio.h>
+
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -19,6 +21,13 @@ private :
 	Bitmap* m_monster; // 04-01
 	Bitmap* m_monsterTrans; // 04-01
 	Bitmap* m_monsterTransKeyed; // 04-01
+
+
+	//Font stuff
+	TTF_Font*	m_pSmallFont; // 04-02
+	TTF_Font*	m_pBigFont;	// 04-02
+
+	void UpdateText(std::string msg, int x, int y, TTF_Font* font, SDL_Color colour);
 
 public:
 	Game2();

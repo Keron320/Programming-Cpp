@@ -5,6 +5,52 @@
 
 
 
+void Game2::UpdateText(std::string msg, int x, int y, TTF_Font * font, SDL_Color colour)
+{
+	SDL_Surface* surface = nullptr;
+	SDL_Texture* texture = nullptr;
+
+	int texW = 0;
+	int texH = 0;
+
+	//SDL_Color color { 0,0,0 };
+
+	//char msg[100]
+	//sprintf_s(msg, "Checks: %d", m_checkTally);
+
+	surface = TTF_RenderText_Solid(font, msg.c_str(), colour);
+	if (!surface)
+	{
+		//Surface not loaded? Output error
+		printf("SURFACE for font not loaded! \n");
+		printf("%s\n", SDL_GetError());
+	}
+
+	else
+	{
+		texture = SDL_CreateTextureFromSurface(m_Renderer, surface);
+		if (!texture)
+		{
+			//Surface not loaded? Output error
+			printf("SURFACE for font not loaded! \n");
+			printf("%s\n", SDL_GetError());
+		}
+		else
+		{
+			SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+			SDL_Rect textRect = { x, y, texW, texH };
+
+			SDL_RenderCopy(m_Renderer, texture, NULL, &textRect);
+		}
+	}
+
+	if (texture)
+		SDL_DestroyTexture(texture);
+
+	if (surface)
+		SDL_FreeSurface(surface);
+}
+
 Game2::Game2()
 {
 	m_Window = nullptr;
@@ -12,6 +58,7 @@ Game2::Game2()
 	   	 
 	// start up
 	SDL_Init(SDL_INIT_VIDEO);
+	TTF_Init(); //04-02
 
 	// create the window
 	m_Window = SDL_CreateWindow(
@@ -49,7 +96,10 @@ Game2::Game2()
 	m_monster = new Bitmap(m_Renderer, "assets/monster.bmp", 100, 100); // 04-01
 	m_monsterTrans = new Bitmap(m_Renderer, "assets/monsterTrans.bmp", 200, 100); // 04-01
 	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 100, true); // 04-01
-	   
+	
+	//read in the font
+	m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf", 15); // 04-02
+	m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf", 50); // 04-02
 }
 
 
@@ -92,6 +142,19 @@ void Game2::Update(void)
 	m_monsterTrans->draw();
 	m_monsterTransKeyed->draw();
 
+	UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
+	UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
+
+	char char_array[] = "Big White";
+	UpdateText(char_array, 50, 140, m_pBigFont, { 255,255,255 });
+
+	std::string myString = "Big Green";
+	UpdateText(myString, 50, 70, m_pBigFont, { 0,255,0 });
+
+	//testString += to_string(testNumber);
+	//UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
+
+
 	
 	//showDrawing
 	SDL_RenderPresent(m_Renderer);
@@ -99,6 +162,12 @@ void Game2::Update(void)
 	//pause for 1/60th sec
 	SDL_Delay(16); // Delay for 16 millisec
 }
+
+
+
+
+
+
 
 
 void Game2::SetDisplayColour(int R, int G, int B, int A)
