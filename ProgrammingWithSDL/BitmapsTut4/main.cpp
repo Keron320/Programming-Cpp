@@ -2,6 +2,7 @@
 #undef main
 
 #include "Game2.h"
+#include "Level.h"
 #include "input.h"
 
 int main()
@@ -13,8 +14,9 @@ int main()
 	bool maxReached = false;
 	Game2* game = new Game2(); //Create a new game object
 	Input* input = new Input();
+	Level* level = new Level();
 
-	if (game && input)
+	if (game && input && level)
 	{
 		//declare and init variables used for colour of the background
 		Uint8 r = 128, g = 128, b = 128, a = 255;
@@ -65,7 +67,7 @@ int main()
 			*/
 
 			game->SetDisplayColour(r, g, b, a); // set our colour
-			game->Update();
+			
 
 		}
 
