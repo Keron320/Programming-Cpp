@@ -49,4 +49,46 @@ Bitmap::Bitmap(SDL_Renderer* renderer, string fileName, int xpos, int ypos, bool
 
 Bitmap::~Bitmap()
 {
+	if (m_pbitmapTexture)
+		SDL_DestroyTexture(m_pbitmapTexture);
+	if (m_pbitmapSurface)
+		SDL_FreeSurface(m_pbitmapSurface);
 }
+
+void Bitmap::draw()
+{
+	//Render the bitmap at the x/y
+	if (m_pbitmapTexture)
+	{
+		SDL_Rect destRect = { m_x, m_y, m_pbitmapSurface->w, m_pbitmapSurface->h };
+		SDL_RenderCopy(m_pRenderer, m_pbitmapTexture, NULL, &destRect);
+	}
+}
+
+void Bitmap::setPos()
+{
+	// m_x = m_x + 10;
+}
+
+//Move bitmap Left
+void Bitmap::moveLeft()
+{
+	m_x = m_x - 15;
+}
+
+//Move bitmap Right
+void Bitmap::moveRight()
+{
+	m_x = m_x + 15;
+}
+//Move bitmap Down
+void Bitmap::moveDown()
+{
+	m_y = m_y + 15;
+}
+//Move bitmap Up
+void Bitmap::moveUp()
+{
+	m_y = m_y - 15;
+}
+

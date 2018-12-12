@@ -2,6 +2,7 @@
 #undef main
 
 #include "Game2.h"
+#include "Level.h"
 #include "input.h"
 
 int main()
@@ -13,8 +14,9 @@ int main()
 	bool maxReached = false;
 	Game2* game = new Game2(); //Create a new game object
 	Input* input = new Input();
+	Level* level = new Level();
 
-	if (game && input)
+	if (game && input && level)
 	{
 		//declare and init variables used for colour of the background
 		Uint8 r = 128, g = 128, b = 128, a = 255;
@@ -22,28 +24,28 @@ int main()
 		//check keys pressed to update variable
 		while (!input->KeyIsPressed(KEY_ESCAPE))
 		{
+			//Update when getting input
 			input->Update();
-
-			//incrase r
-			if (input->KeyIsPressed(KEY_R))
+			
+			if (input->KeyIsPressed(KEY_RIGHT))
 			{
-				if (++r > 255) r = 0;
+				game->moveRight();
 			}
-
-			//incrase g
-			if (input->KeyIsPressed(KEY_G))
+			if (input->KeyIsPressed(KEY_LEFT))
 			{
-				if (++g > 255) g = 0;
+				game->moveLeft();
 			}
-
-			//incrase b
-			if (input->KeyIsPressed(KEY_B))
+			if (input->KeyIsPressed(KEY_DOWN))
 			{
-				if (++b > 255) b = 0;
+				game->moveDown();
 			}
-
+			if (input->KeyIsPressed(KEY_UP))
+			{
+				game->moveUp();
+			}
+			game->Update();
 			game->SetDisplayColour(r, g, b, a); // set our colour
-		
+			
 
 		}
 
