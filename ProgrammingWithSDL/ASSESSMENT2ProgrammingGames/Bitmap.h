@@ -14,7 +14,7 @@ private:
 	SDL_Renderer*	m_pRenderer;
 
 	int m_x, m_y;
-
+	
 
 public:
 
@@ -23,9 +23,7 @@ public:
 	~Bitmap();
 
 	void draw();
-
 	void setPos();
-
 	//Bitmap control
 	void moveLeft();
 	void moveRight();

@@ -73,22 +73,22 @@ void Bitmap::setPos()
 //Move bitmap Left
 void Bitmap::moveLeft()
 {
-	m_x = m_x - 15;
+	m_x = m_x - 1;
 }
 
 //Move bitmap Right
 void Bitmap::moveRight()
 {
-	m_x = m_x + 15;
+	m_x = m_x + 1;
 }
 //Move bitmap Down
 void Bitmap::moveDown()
 {
-	m_y = m_y + 15;
+	m_y = m_y + 1;
 }
 //Move bitmap Up
 void Bitmap::moveUp()
 {
-	m_y = m_y - 15;
+	m_y = m_y - 1;
 }
 

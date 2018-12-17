@@ -55,17 +55,18 @@ public:
 	void moveDown();
 
 	//FPS stuff
-	bool m_updateLogic;
-	bool m_renderFrame;
-	int m_consecutiveLogicUpdates;
-	const int m_maxConsecutiveLogicUpdates = 10;
+	bool		m_updateLogic;
+	bool		m_renderFrame;
+	int			m_consecutiveLogicUpdates;
+	const int	m_maxConsecutiveLogicUpdates = 10;
+	SDL_TimerID	m_gameTimerID;
 
 	//enums
 	enum GameEvent { GE_TIMER, NUM_GAME_EVENTS };
 
-	const int FRAMES_PER_SECOND = 60;
-	const int MILLISECS_PER_FRAME = 1000 / FRAMES_PER_SECOND; //(Rounded down);
-	SDL_TimerID gametimer = SDL_AddTimer(MILLISECS_PER_FRAME, &Game2::TimerCallback, this);
+	const int	FRAMES_PER_SECOND = 60;
+	const int	MILLISECS_PER_FRAME = 1000 / FRAMES_PER_SECOND; //(Rounded down);
+	SDL_TimerID	gametimer = SDL_AddTimer(MILLISECS_PER_FRAME, &Game2::TimerCallback, this);
 
 	void CheckEvents();
 	

@@ -91,7 +91,6 @@ Game2::Game2()
 		getchar();
 	}
 
-
 	// New Stuff Bitmaps
 	m_monster = new Bitmap(m_Renderer, "assets/monster.bmp", 100, 100); // 04-01
 	m_monsterTrans = new Bitmap(m_Renderer, "assets/monsterTrans.bmp", 200, 100); // 04-01
@@ -204,7 +203,7 @@ void Game2::Update(void)
 	SDL_RenderPresent(m_Renderer);
 
 	//pause for 1/60th sec
-	SDL_Delay(16); // Delay for 16 millisec
+	//SDL_Delay(16); // Delay for 16 millisec
 }
 
 void Game2::SetDisplayColour(int R, int G, int B, int A)
@@ -227,7 +226,7 @@ void Game2::SetDisplayColour(int R, int G, int B, int A)
 		SDL_RenderPresent(m_Renderer);
 
 		//Pause for 5 sec
-		SDL_Delay(100); //Delay takes millisecs
+		//SDL_Delay(100); //Delay takes millisecs
 	}
 }
 
@@ -268,27 +267,26 @@ void Game2::CheckEvents()
 	{
 		switch (event.type)
 		{
-		case SDL_USEREVENT:
-		{
-			if (event.user.code == GE_TIMER)
+			case SDL_USEREVENT:
 			{
-				// we have a ping!
-				// if the logic taking too long ensures frame is rendered occasionally and input is responsive
-				// this essentially ignores logic updates if there are a lot of consecutive ones
-				if (++m_consecutiveLogicUpdates < m_maxConsecutiveLogicUpdates)
+				if (event.user.code == GE_TIMER)
 				{
-					m_updateLogic = true;
-				}
+					// we have a ping!
+					// if the logic taking too long ensures frame is rendered occasionally and input is responsive
+					// this essentially ignores logic updates if there are a lot of consecutive ones
+					if (++m_consecutiveLogicUpdates < m_maxConsecutiveLogicUpdates)
+					{
+						m_updateLogic = true;
+					}
 
-				//only render frame	if no events left to proccess
-				if (SDL_PeepEvents(NULL, 1, SDL_PEEKEVENT, SDL_USEREVENT, SDL_USEREVENT) == 0)
-				{
-					m_renderFrame = true;
-					m_consecutiveLogicUpdates = 0;
+					//only render frame	if no events left to proccess
+					if (SDL_PeepEvents(NULL, 1, SDL_PEEKEVENT, SDL_USEREVENT, SDL_USEREVENT) == 0)
+					{
+						m_renderFrame = true;
+						m_consecutiveLogicUpdates = 0;
+					}
 				}
 			}
 		}
-		}
 	}
 }
-
