@@ -181,9 +181,11 @@ void Game2::Update(void)
 	SDL_RenderClear(m_Renderer);
 	
 	//show our bitmaps
-	m_monster->draw();
-	m_monsterTrans->draw();
-	m_monsterTransKeyed->draw();
+	//Draw takes argument to scale x and y
+	m_monster->draw(1,1);
+	m_monsterTransKeyed->draw(2,2);
+	m_monsterTrans->draw(1,1);
+
 
 	UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
 	UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
@@ -242,22 +244,24 @@ void Game2::setPos()
 //Movement
 void Game2::moveLeft()
 {
-	m_monster->moveLeft();
+	//m_monster->moveLeft();
+	m_monsterTransKeyed->moveLeft();
 }
 
 void Game2::moveRight()
 {
-	m_monster->moveRight();
+	m_monsterTransKeyed->moveRight();
+
 }
 
 void Game2::moveUp()
 {
-	m_monster->moveUp();
+	m_monsterTransKeyed->moveUp();
 }
 
 void Game2::moveDown()
 {
-	m_monster->moveDown();
+	m_monsterTransKeyed->moveDown();
 }
 
 void Game2::CheckEvents()

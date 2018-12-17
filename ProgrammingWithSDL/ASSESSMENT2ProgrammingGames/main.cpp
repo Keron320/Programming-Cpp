@@ -19,7 +19,7 @@ int main()
 	if (game && input)
 	{
 		//declare and init variables used for colour of the background
-		Uint8 r = 128, g = 128, b = 128, a = 255;
+		Uint8 r = 51, g = 171, b = 249, a = 255;
 		game->SetDisplayColour(r, g, b, a); // set our colour
 		game->CreateTimerEvent();
 		//check keys pressed to update variable
