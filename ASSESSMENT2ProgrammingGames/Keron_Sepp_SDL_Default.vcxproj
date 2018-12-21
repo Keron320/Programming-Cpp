@@ -23,7 +23,7 @@
     <ProjectGuid>{663F3D03-2775-4C19-B889-9C11F3AC1D72}</ProjectGuid>
     <RootNamespace>KeronSeppSDLDefault</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
-    <ProjectName>Game</ProjectName>
+    <ProjectName>Tut3e1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

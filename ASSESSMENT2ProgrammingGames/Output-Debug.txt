@@ -1,0 +1,12 @@
+﻿'Tut3e1.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\winmmbase.dll'
+'Tut3e1.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\winmmbase.dll'
+'Tut3e1.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\WinTypes.dll'
+'Tut3e1.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\WinTypes.dll'
+'Tut3e1.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\igdumd32.dll'
+'Tut3e1.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\ResourcePolicyClient.dll'
+The thread 0x2304 has exited with code 0 (0x0).
+The thread 0x7b0 has exited with code 0 (0x0).
+The thread 0x368 has exited with code 0 (0x0).
+The thread 0x29f8 has exited with code 0 (0x0).
+The thread 0x20dc has exited with code 0 (0x0).
+The program '[9356] Tut3e1.exe' has exited with code 0 (0x0).
