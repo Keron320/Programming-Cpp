@@ -60,8 +60,15 @@ int main()
 			}
 			
 
-			if (selectedOption == 3)
-				SDL_QUIT;
+			if (input->KeyIsPressed(KEY_RETURN))
+			{
+				game->moveUp();
+
+				if (selectedOption == 3)
+				{
+					std::cout << "333";
+				}
+			}
 			//switch (selectedOption)
 			//{
 			//case 3:
