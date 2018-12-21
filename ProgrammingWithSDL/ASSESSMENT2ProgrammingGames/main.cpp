@@ -59,7 +59,7 @@ int main()
 				}
 			}
 
-			switch(KEY_RETURN && selectedOption)
+			switch(input->KeyIsPressed(KEY_RETURN) && selectedOption)
 			{
 			case 3: SDL_QUIT;
 			}
