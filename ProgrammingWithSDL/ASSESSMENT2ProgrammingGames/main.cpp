@@ -59,9 +59,11 @@ int main()
 				}
 			}
 
-			switch(input->KeyIsPressed(KEY_RETURN) && selectedOption)
+			switch(selectedOption)
 			{
-			case 3: SDL_QUIT;
+			case 3:
+				if (input->KeyIsPressed(KEY_RETURN))
+					SDL_QUIT;
 			}
 
 			//update the game			
