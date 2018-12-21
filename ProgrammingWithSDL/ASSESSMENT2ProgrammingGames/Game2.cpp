@@ -91,11 +91,22 @@ Game2::Game2()
 		getchar();
 	}
 
+
 	// New Stuff Bitmaps
 	m_monster = new Bitmap(m_Renderer, "assets/monster.bmp", 100, 100); // 04-01
 	m_monsterTrans = new Bitmap(m_Renderer, "assets/monsterTrans.bmp", 200, 100); // 04-01
 	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 100, true); // 04-01
-	
+
+
+	// Menubars
+	m_menuBarHL1 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 100, true); // 04-01
+	m_menuBarHL2 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 200, true); // 04-01
+	m_menuBarHL3 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 300, true); // 04-01
+	m_menuBar1 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 100, true); // 04-01
+	m_menuBar2 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 200, true); // 04-01
+	m_menuBar3 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 300, true); // 04-01
+
+
 	//read in the font
 	m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf", 15); // 04-02
 	m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf", 50); // 04-02
@@ -137,6 +148,21 @@ Game2::~Game2()
 
 	if (m_monster)
 		delete m_monster;
+
+	// Cleaning up after menu boxes
+	if (m_menuBar1)
+		delete m_menuBar1;
+	if (m_menuBar2)
+		delete m_menuBar2;
+	if (m_menuBar3)
+		delete m_menuBar3;
+
+	if (m_menuBarHL1)
+		delete m_menuBarHL1;
+	if (m_menuBarHL2)
+		delete m_menuBarHL2;
+	if (m_menuBarHL3)
+		delete m_menuBarHL3;
 }
 
 
@@ -187,6 +213,7 @@ void Game2::Update(void)
 	m_monsterTrans->draw(1,1);
 
 
+
 	UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
 	UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
 
@@ -208,7 +235,48 @@ void Game2::Update(void)
 	//SDL_Delay(16); // Delay for 16 millisec
 }
 
-void Game2::SetDisplayColour(int R, int G, int B, int A)
+void Game2::displayMainMenu(int menuOption)
+{
+
+	CheckEvents();
+
+	//wipe the display to the current set colour
+	SDL_RenderClear(m_Renderer);
+
+	//show our bitmaps
+	//Draw takes argument to scale x and y
+	//Draw the menubar box
+	switch (menuOption)
+	{
+	case 1 :
+	m_menuBarHL1->draw(1, 1);
+	m_menuBar2->draw(1, 1);
+	m_menuBar3->draw(1, 1);
+	break;
+
+	case 2:
+		m_menuBar1->draw(1, 1);
+		m_menuBarHL2->draw(1, 1);
+		m_menuBar3->draw(1, 1);
+	break;
+
+	case 3:
+		m_menuBar1->draw(1, 1);
+		m_menuBar2->draw(1, 1);
+		m_menuBarHL3->draw(1, 1);
+	break;
+	}
+	// Display text on the empty menubars
+	UpdateText("Exit", 150, 300, m_pBigFont, { 255,255,255 });
+	UpdateText("Credits", 150, 200, m_pBigFont, { 255,255,255 });
+	UpdateText("New game", 150, 100, m_pBigFont, { 255,255,255 });
+
+	//showDrawing
+	SDL_Delay(100); // Delay for 16 millisec
+	SDL_RenderPresent(m_Renderer);
+}
+
+void Game2::SetDisplayColour(int R, int		G, int B, int A)
 {
 	if (m_Renderer)
 	{

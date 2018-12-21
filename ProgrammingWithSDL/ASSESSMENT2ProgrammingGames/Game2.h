@@ -23,6 +23,13 @@ private :
 	Bitmap* m_monster; // 04-01
 	Bitmap* m_monsterTrans; // 04-01
 	Bitmap* m_monsterTransKeyed; // 04-01
+	//Menu buttons
+	Bitmap* m_menuBar1;
+	Bitmap* m_menuBar2;
+	Bitmap* m_menuBar3;
+	Bitmap* m_menuBarHL1;
+	Bitmap* m_menuBarHL2;
+	Bitmap* m_menuBarHL3;
 
 
 	//Font stuff
@@ -35,12 +42,17 @@ public:
 	Game2();
 	~Game2();
 
+	int xposition = 100;
+	int yposition = 100;
+
 	//static callback method
 	static Uint32 TimerCallback(Uint32 interval, void* gameObjectIn);
 
 	void CreateTimerEvent();
 
 	void Update(void);
+	// Function to only display the main menu
+	void displayMainMenu(int menuOption);
 
 	void SetDisplayColour(int R, int G, int B, int A);
 

@@ -16,6 +16,10 @@ int main()
 	Input* input = new Input();
 	Level* level = new Level();
 
+	//Default menu option
+	int selectedOption = 1;
+
+
 	if (game && input)
 	{
 		//declare and init variables used for colour of the background
@@ -23,8 +27,9 @@ int main()
 		game->SetDisplayColour(r, g, b, a); // set our colour
 		game->CreateTimerEvent();
 		//check keys pressed to update variable
+		//Main menu loop
 		while (!input->KeyIsPressed(KEY_ESCAPE))
-		{	
+		{
 			input->Update();
 
 			if (input->KeyIsPressed(KEY_RIGHT))
@@ -38,16 +43,38 @@ int main()
 			if (input->KeyIsPressed(KEY_DOWN))
 			{
 				game->moveDown();
+				selectedOption = selectedOption + 1;
+				if (selectedOption > 3)
+				{
+					selectedOption = 1;
+				}
 			}
 			if (input->KeyIsPressed(KEY_UP))
 			{
 				game->moveUp();
+				selectedOption = selectedOption - 1;
+				if (selectedOption < 1)
+				{
+					selectedOption = 3;
+				}
+			}
+
+			switch(KEY_RETURN && selectedOption)
+			{
+			case 3: SDL_QUIT;
 			}
 
 			//update the game			
-			game->Update();
+			game->displayMainMenu(selectedOption);
+		}
+
+		game->SetDisplayColour(r, g, b, a); // set our colour
+		while (!input->KeyIsPressed(KEY_ESCAPE))
+		{
+			// write some code here about the game
 		}
 	}
+
 
 	return 0;						//Exit nicely
 }
