@@ -16,17 +16,22 @@ int main()
 	Input* input = new Input();
 	Level* level = new Level();
 
-	if (game && input && level)
+	//Default menu option
+	int selectedOption = 1;
+
+
+	if (game && input)
 	{
 		//declare and init variables used for colour of the background
-		Uint8 r = 128, g = 128, b = 128, a = 255;
-
+		Uint8 r = 51, g = 171, b = 249, a = 255;
+		game->SetDisplayColour(r, g, b, a); // set our colour
+		game->CreateTimerEvent();
 		//check keys pressed to update variable
+		//Main menu loop
 		while (!input->KeyIsPressed(KEY_ESCAPE))
 		{
-			//Update when getting input
 			input->Update();
-			
+
 			if (input->KeyIsPressed(KEY_RIGHT))
 			{
 				game->moveRight();
@@ -38,77 +43,43 @@ int main()
 			if (input->KeyIsPressed(KEY_DOWN))
 			{
 				game->moveDown();
+				selectedOption = selectedOption + 1;
+				if (selectedOption > 3)
+				{
+					selectedOption = 1;
+				}
 			}
 			if (input->KeyIsPressed(KEY_UP))
 			{
 				game->moveUp();
+				selectedOption = selectedOption - 1;
+				if (selectedOption < 1)
+				{
+					selectedOption = 3;
+				}
 			}
-
-			//Changing colours with keys
-			/*
-				//incrase r
-			if (input->KeyIsPressed(KEY_R))
-			{
-				if (++r > 255) r = 0;
-				game->setPos();
-			}
-
-			//incrase g
-			if (input->KeyIsPressed(KEY_G))
-			{
-				if (++g > 255) g = 0;
-			}
-
-			//incrase b
-			if (input->KeyIsPressed(KEY_B))
-			{
-				if (++b > 255) b = 0;
-			}
-			*/
-
-			game->SetDisplayColour(r, g, b, a); // set our colour
 			
 
+			if (selectedOption == 3)
+				SDL_QUIT;
+			//switch (selectedOption)
+			//{
+			//case 3:
+			//	if (input->KeyIsPressed(KEY_RETURN))
+			//		SDL_QUIT;
+			//}
+
+			//update the game			
+			game->displayMainMenu(selectedOption);
 		}
 
+		game->SetDisplayColour(r, g, b, a); // set our colour
+		while (!input->KeyIsPressed(KEY_ESCAPE))
+		{
+			// write some code here about the game
+		}
 	}
 
 
-
-	//if (game)
-	//{
-	//	while(onOff == true)
-	//	{
-	//		if (R != 255 && maxReached == false || G != 255 && maxReached == false || B != 255 && maxReached == false) {
-	//		R = R + 1;
-	//		G = G + 2;
-	//		B = B + 3;
-	//
-	//		game->SetDisplayColour(R, G, B);	//set and show our coloured display;
-
-	//			if (R == 255 && G == 255 && B == 255) 
-	//			{
-	//				maxReached = true;
-	//			}
-	//		}
-
-	//		else if (maxReached == true) {
-	//			R = R - 1;
-	//			G = G - 2;
-	//			B = B - 3;
-	//			if (R == 0 && G == 0 && B == 0) maxReached = false;
-	//			game->SetDisplayColour(R, G, B);	//set and show our coloured display;
-	//		}
-
-	//		//game->SetDisplayColour(R, G, B);	//set and show our coloured display;
-	//	
-	//	}
-
-	//	delete game;				// Clean up
-	//	game = nullptr;				
-	//	
-	//}
-
 	return 0;						//Exit nicely
-
 }

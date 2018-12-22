@@ -55,13 +55,18 @@ Bitmap::~Bitmap()
 		SDL_FreeSurface(m_pbitmapSurface);
 }
 
-void Bitmap::draw()
+void Bitmap::draw(int m_scaleX, int m_scaleY)
 {
+	// To scale the bitmap
+	scalerX = m_scaleX;
+	scalerY = m_scaleY;
 	//Render the bitmap at the x/y
 	if (m_pbitmapTexture)
 	{
-		SDL_Rect destRect = { m_x, m_y, m_pbitmapSurface->w, m_pbitmapSurface->h };
+		
+		SDL_Rect destRect = { m_x, m_y, m_pbitmapSurface->w*scalerX, m_pbitmapSurface->h*scalerY};
 		SDL_RenderCopy(m_pRenderer, m_pbitmapTexture, NULL, &destRect);
+		
 	}
 }
 
@@ -73,22 +78,22 @@ void Bitmap::setPos()
 //Move bitmap Left
 void Bitmap::moveLeft()
 {
-	m_x = m_x - 15;
-}
+	m_x = m_x - 1;
+	}
 
 //Move bitmap Right
 void Bitmap::moveRight()
 {
-	m_x = m_x + 15;
+	m_x = m_x + 1;
 }
 //Move bitmap Down
 void Bitmap::moveDown()
 {
-	m_y = m_y + 15;
+	m_y = m_y + 1;
 }
 //Move bitmap Up
 void Bitmap::moveUp()
 {
-	m_y = m_y - 15;
+	m_y = m_y - 1;
 }
 

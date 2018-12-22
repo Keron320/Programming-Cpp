@@ -43,6 +43,9 @@ void Input::Update(void)
 			case SDLK_DOWN:
 				m_keysPressed[KEY_DOWN] = true;
 				break;
+			case SDLK_RETURN:
+				m_keysPressed[KEY_RETURN] = true;
+				break;
 			}
 		}
 
@@ -73,6 +76,9 @@ void Input::Update(void)
 				break;
 			case SDLK_DOWN:
 				m_keysPressed[KEY_DOWN] = false;
+				break;
+			case SDLK_RETURN:
+				m_keysPressed[KEY_RETURN] = false;
 				break;
 			}
 		}

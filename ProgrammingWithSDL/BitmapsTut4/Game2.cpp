@@ -96,10 +96,31 @@ Game2::Game2()
 	m_monster = new Bitmap(m_Renderer, "assets/monster.bmp", 100, 100); // 04-01
 	m_monsterTrans = new Bitmap(m_Renderer, "assets/monsterTrans.bmp", 200, 100); // 04-01
 	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 100, true); // 04-01
-	
+
+
+	// Menubars
+	m_menuBarHL1 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 100, true); // 04-01
+	m_menuBarHL2 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 200, true); // 04-01
+	m_menuBarHL3 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 300, true); // 04-01
+	m_menuBar1 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 100, true); // 04-01
+	m_menuBar2 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 200, true); // 04-01
+	m_menuBar3 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 300, true); // 04-01
+
+
 	//read in the font
 	m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf", 15); // 04-02
 	m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf", 50); // 04-02
+
+
+	//start up
+	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER);
+
+
+	//FPS things
+
+	m_updateLogic = true;
+	m_renderFrame = true;
+	m_consecutiveLogicUpdates = 0;
 }
 
 
@@ -127,20 +148,71 @@ Game2::~Game2()
 
 	if (m_monster)
 		delete m_monster;
+
+	// Cleaning up after menu boxes
+	if (m_menuBar1)
+		delete m_menuBar1;
+	if (m_menuBar2)
+		delete m_menuBar2;
+	if (m_menuBar3)
+		delete m_menuBar3;
+
+	if (m_menuBarHL1)
+		delete m_menuBarHL1;
+	if (m_menuBarHL2)
+		delete m_menuBarHL2;
+	if (m_menuBarHL3)
+		delete m_menuBarHL3;
 }
 
 
+Uint32 Game2::TimerCallback(Uint32 interval, void * gameObjectIn)
+{
+	if (gameObjectIn)
+	{
+		Game2* gameObject = static_cast<Game2*>(gameObjectIn);
+		gameObject->CreateTimerEvent();
+	}
+
+	// Returning 0 instead of interval will cancel the timer
+	return interval;
+}
+
+void Game2::CreateTimerEvent()
+{
+	SDL_Event event;
+	SDL_UserEvent userEvent;
+
+	//set up userEvent with default data;
+	userEvent.type = SDL_USEREVENT;
+	userEvent.data1 = NULL;
+	userEvent.data2 = NULL;
+
+	//this is a TIMER event
+	userEvent.code = GE_TIMER;
+
+	//Create the event
+	event.type = SDL_USEREVENT;
+	event.user = userEvent;
+
+	//Push the event
+	SDL_PushEvent(&event);
+}
+
 void Game2::Update(void)
 {
-	//CheckEvents();
+	CheckEvents();
 
 	//wipe the display to the current set colour
 	SDL_RenderClear(m_Renderer);
 	
 	//show our bitmaps
-	m_monster->draw();
-	m_monsterTrans->draw();
-	m_monsterTransKeyed->draw();
+	//Draw takes argument to scale x and y
+	m_monster->draw(1,1);
+	m_monsterTransKeyed->draw(2,2);
+	m_monsterTrans->draw(1,1);
+
+
 
 	UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
 	UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
@@ -160,17 +232,51 @@ void Game2::Update(void)
 	SDL_RenderPresent(m_Renderer);
 
 	//pause for 1/60th sec
-	SDL_Delay(16); // Delay for 16 millisec
+	//SDL_Delay(16); // Delay for 16 millisec
 }
 
+void Game2::displayMainMenu(int menuOption)
+{
 
+	CheckEvents();
 
+	//wipe the display to the current set colour
+	SDL_RenderClear(m_Renderer);
 
+	//show our bitmaps
+	//Draw takes argument to scale x and y
+	//Draw the menubar box
+	switch (menuOption)
+	{
+	case 1 :
+	m_menuBarHL1->draw(1, 1);
+	m_menuBar2->draw(1, 1);
+	m_menuBar3->draw(1, 1);
+	break;
 
+	case 2:
+		m_menuBar1->draw(1, 1);
+		m_menuBarHL2->draw(1, 1);
+		m_menuBar3->draw(1, 1);
+	break;
 
+	case 3:
+		m_menuBar1->draw(1, 1);
+		m_menuBar2->draw(1, 1);
+		m_menuBarHL3->draw(1, 1);
+	break;
+	}
+	// Display text on the empty menubars
+	UpdateText("Exit", 150, 300, m_pBigFont, { 255,255,255 });
+	UpdateText("Credits", 150, 200, m_pBigFont, { 255,255,255 });
+	UpdateText("New game", 150, 100, m_pBigFont, { 255,255,255 });
 
+	//showDrawing
+	SDL_Delay(100); // Delay for 16 millisec
+	SDL_RenderPresent(m_Renderer);
+}
 
-void Game2::SetDisplayColour(int R, int G, int B, int A)
+void Game2::SetDisplayColour(int R, int		G, int B, int A)
 {
 	if (m_Renderer)
 	{
@@ -190,7 +296,7 @@ void Game2::SetDisplayColour(int R, int G, int B, int A)
 		SDL_RenderPresent(m_Renderer);
 
 		//Pause for 5 sec
-		SDL_Delay(100); //Delay takes millisecs
+		//SDL_Delay(100); //Delay takes millisecs
 	}
 }
 
@@ -206,21 +312,53 @@ void Game2::setPos()
 //Movement
 void Game2::moveLeft()
 {
-	m_monster->moveLeft();
+	//m_monster->moveLeft();
+	m_monsterTransKeyed->moveLeft();
 }
 
 void Game2::moveRight()
 {
-	m_monster->moveRight();
+	m_monsterTransKeyed->moveRight();
+
 }
 
 void Game2::moveUp()
 {
-	m_monster->moveUp();
+	m_monsterTransKeyed->moveUp();
 }
 
 void Game2::moveDown()
 {
-	m_monster->moveDown();
+	m_monsterTransKeyed->moveDown();
 }
 
+void Game2::CheckEvents()
+{
+	//poll the event queue
+	while (SDL_PollEvent(&event))
+	{
+		switch (event.type)
+		{
+			case SDL_USEREVENT:
+			{
+				if (event.user.code == GE_TIMER)
+				{
+					// we have a ping!
+					// if the logic taking too long ensures frame is rendered occasionally and input is responsive
+					// this essentially ignores logic updates if there are a lot of consecutive ones
+					if (++m_consecutiveLogicUpdates < m_maxConsecutiveLogicUpdates)
+					{
+						m_updateLogic = true;
+					}
+
+					//only render frame	if no events left to proccess
+					if (SDL_PeepEvents(NULL, 1, SDL_PEEKEVENT, SDL_USEREVENT, SDL_USEREVENT) == 0)
+					{
+						m_renderFrame = true;
+						m_consecutiveLogicUpdates = 0;
+					}
+				}
+			}
+		}
+	}
+}
