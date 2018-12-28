@@ -1,0 +1,9 @@
+﻿'Keron_Sepp_SDL_Default.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\WinTypes.dll'
+'Keron_Sepp_SDL_Default.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\igdumd32.dll'
+'Keron_Sepp_SDL_Default.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\ResourcePolicyClient.dll'
+The thread 0x1abc has exited with code 0 (0x0).
+The thread 0x3e48 has exited with code 0 (0x0).
+The thread 0x3c70 has exited with code 0 (0x0).
+The thread 0x34b0 has exited with code 0 (0x0).
+The thread 0x3dd0 has exited with code 0 (0x0).
+The program '[5328] Keron_Sepp_SDL_Default.exe' has exited with code 0 (0x0).
