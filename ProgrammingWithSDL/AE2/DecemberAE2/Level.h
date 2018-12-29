@@ -32,7 +32,6 @@ public:
 	
 	void tileBlock(int r, int g, int b);
 	void levelRenderer();
-	void show();
 
 	void levelData(SDL_Renderer* renderer);
 	~Level();

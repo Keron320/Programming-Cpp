@@ -86,12 +86,9 @@ int main()
 				}
 			}
 
-
+			
 			if (menu == false)
 			{
-
-				game->SetDisplayColour(128, 128, b, a); // set our colour
-
 				while (!input->KeyIsPressed(KEY_ESCAPE))
 				{
 					input->Update();

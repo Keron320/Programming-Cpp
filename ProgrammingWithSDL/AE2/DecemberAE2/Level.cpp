@@ -4,22 +4,8 @@
 
 Level::Level(SDL_Renderer* renderer)
 {
-	m_pRenderer = renderer;
-
-
-	//set the block dimensions
-	m_blockWidth = 10;
-	m_blockHeight = 10;
-
 	//Get LevelData
-	levelData(m_pRenderer);
-	
-	m_pbitmapSurface = SDL_CreateRGBSurface(0, m_blockWidth * getWidth(), m_blockHeight* getHeight(), 32, 0, 0, 0, 0);
-	
-
-	//Create the bitmap texture
-	m_pbitmapTexture = SDL_CreateTextureFromSurface(m_pRenderer, m_pbitmapSurface);
-	
+	levelData(renderer);
 }
 
 int Level::getHeight()
@@ -37,18 +23,9 @@ int Level::getWidth()
 
 void Level::tileBlock(int r, int g, int b)
 {
-	//SDL_Surface* surface = SDL_CreateRGBSurface(0, m_blockWidth, m_blockHeight, 32, 0, 0, 0, 0);
-	
-	//Set the block colour
-	SDL_Rect outlineRect = { m_x, m_y, m_blockWidth, m_blockHeight };
-	SDL_SetRenderDrawColor(m_pRenderer, r, g, b, 0);
-	SDL_RenderDrawRect(m_pRenderer, &outlineRect);
-
-	//Don't need the surface anymore
-	//SDL_FreeSurface(surface);
-
-	//SDL_Rect destRect = { m_x, m_y, m_blockWidth, m_blockHeight };
-	//SDL_RenderCopy(m_pRenderer, m_pbitmapTexture, NULL, &destRect);
+	SDL_Rect rect = { m_x, m_y, m_blockWidth, m_blockHeight };
+	SDL_SetRenderDrawColor(m_pRenderer, r, g, b, 255);
+	SDL_RenderFillRect(m_pRenderer, &rect);
 }
 
 void Level::levelRenderer()
@@ -65,39 +42,17 @@ void Level::levelRenderer()
 			if (m_gridLayout[i][j] == 'W')
 			{
 				//Block attributes, color and so on
-				tileBlock(255,244,233);
+				tileBlock(128, 128, 128);
 			}
-			 std::cout << m_x << "," << m_y << std::endl;
+			if (m_gridLayout[i][j] == 'F')
+			{
+				//Block attributes, color and so on
+				tileBlock(139, 69, 19);
+			}
+			 //std::cout << m_x << "," << m_y << std::endl;
 		}
 	}
 }
-
-void Level::show()
-{
-	////Draw the object
-	if (m_pbitmapTexture)
-	{
-		SDL_Rect destRect = { 0, 0, m_pbitmapSurface->w, m_pbitmapSurface->h };
-		SDL_RenderCopy(m_pRenderer, m_pbitmapTexture, NULL, &destRect);
-	}
-
-
-	//// Create a rectangle
-	//SDL_Rect r;
-	//r.x = 50;
-	//r.y = 50;
-	//r.w = 50;
-	//r.h = 50;
-
-	//// Change color to blue!
-	//SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 255, 255);
-
-	//// Render our SDL_Rect
-	//// The rectangle will now be blue
-	//SDL_RenderDrawRect(m_pRenderer, &r);
-
-}
-
 
 void Level::levelData(SDL_Renderer* renderer)
 {
@@ -105,16 +60,16 @@ void Level::levelData(SDL_Renderer* renderer)
 	m_pRenderer = renderer;
 
 	//set the block dimensions
-	m_blockWidth = 10;
-	m_blockHeight = 10;
+	m_blockWidth = 100;
+	m_blockHeight = 100;
 
 	//Level Data
-	m_gridLayout.push_back("WWWWWW");
-	m_gridLayout.push_back("W....W");
-	m_gridLayout.push_back("W....W");
-	m_gridLayout.push_back("W....W");
-	m_gridLayout.push_back("W....W");
-	m_gridLayout.push_back("WWWWWW");
+	m_gridLayout.push_back("......W");
+	m_gridLayout.push_back("......W");
+	m_gridLayout.push_back("......W");
+	m_gridLayout.push_back("......W");
+	m_gridLayout.push_back("FFFFFFF");
+	m_gridLayout.push_back("FFFFFFF");
 }
 
 Level::~Level()

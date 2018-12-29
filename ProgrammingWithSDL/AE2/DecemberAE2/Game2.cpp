@@ -109,7 +109,6 @@ Game2::Game2()
 	m_menuBar3 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 300, true);
 	m_Panel = new Bitmap(m_Renderer, "assets/Panel.bmp", 100, 50, true);
 	m_level = new Level(m_Renderer);
-	levelDisplay();
 	
 
 	// start up
@@ -208,22 +207,17 @@ void Game2::Update(void)
 {
 	CheckEvents();
 
-	//SDL_SetRenderDrawColor(m_Renderer, 255,0,255,255);
+	SDL_SetRenderDrawColor(m_Renderer, 86, 171, 255, 255);
+
 	//wipe the display to the current set colour
 	SDL_RenderClear(m_Renderer);
-
-
-	//Display level
-	m_level->show();
 
 	//show our bitmaps
 	//Draw takes argument to scale x and y
 	m_monster->draw(1, 1);
 	m_monsterTransKeyed->draw(2, 2);
 	m_monsterTrans->draw(1, 1);
-
-
-
+	   
 	UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
 	UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
 
@@ -235,11 +229,12 @@ void Game2::Update(void)
 
 	//testString += to_string(testNumber);
 	//UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
-
-
+	
 	//pause for 1/60th sec
 	//SDL_Delay(16); // Delay for 16 millisec
-
+	
+	//Display level
+	m_level->levelRenderer();
 
 	////showDrawing
 	SDL_RenderPresent(m_Renderer);
@@ -387,15 +382,4 @@ void Game2::CheckEvents()
 		}
 		}
 	}
-}
-
-void Game2::levelDisplay()
-{
-	CheckEvents();
-
-	
-	m_level->levelRenderer();
-
-	//showDrawing
-	SDL_RenderPresent(m_Renderer);
 }
