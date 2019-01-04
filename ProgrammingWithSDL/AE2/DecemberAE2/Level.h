@@ -2,11 +2,22 @@
 #include <string>
 #include <vector>
 #include <SDL.h>
-#include "Bitmap.h"
+#include "CCollisionRectangle.h"
 
-struct SDL_Surface;
-struct SDL_Texture;
-struct SDL_Renderer;
+//-----------------------------------------------------------------------------
+//
+// Copyright (C) Keron Sepp 2018-2019
+// 
+//
+//
+//
+//
+// DESCRIPTION:
+//
+//-----------------------------------------------------------------------------
+//struct SDL_Surface;
+//struct SDL_Texture;
+//struct SDL_Renderer;
 
 #pragma once
 class Level
@@ -32,6 +43,18 @@ public:
 	
 	void tileBlock(int r, int g, int b);
 	void levelRenderer();
+
+	std::vector<std::string> GetTiles()
+	{
+		return	m_gridLayout;
+	}
+
+	void getTile(int,int);
+
+	CCollisionRectangle* GetTileRect(int x, int y)
+	{
+		return new CCollisionRectangle(x * m_blockWidth, y * m_blockHeight, m_blockWidth, m_blockHeight);
+	}
 
 	void levelData(SDL_Renderer* renderer);
 	~Level();

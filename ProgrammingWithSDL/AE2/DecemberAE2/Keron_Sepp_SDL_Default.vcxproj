@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="CCollisionRectangle.cpp" />
+    <ClCompile Include="Creature.cpp" />
     <ClCompile Include="Game2.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -27,6 +29,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h" />
+    <ClInclude Include="CCollisionRectangle.h" />
+    <ClInclude Include="Creature.h" />
     <ClInclude Include="Game2.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="Level.h" />

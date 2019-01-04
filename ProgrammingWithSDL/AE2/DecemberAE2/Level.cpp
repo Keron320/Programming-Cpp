@@ -1,5 +1,16 @@
 #include "Level.h"
 
+//-----------------------------------------------------------------------------
+//
+// Copyright (C) Keron Sepp 2018-2019
+// 
+//
+//
+//
+//
+// DESCRIPTION:  Level data, wall data, etc.
+//
+//-----------------------------------------------------------------------------
 
 
 Level::Level(SDL_Renderer* renderer)
@@ -23,10 +34,14 @@ int Level::getWidth()
 
 void Level::tileBlock(int r, int g, int b)
 {
+	
 	SDL_Rect rect = { m_x, m_y, m_blockWidth, m_blockHeight };
+	CCollisionRectangle(m_x, m_y, m_blockWidth, m_blockHeight);
+
 	SDL_SetRenderDrawColor(m_pRenderer, r, g, b, 255);
 	SDL_RenderFillRect(m_pRenderer, &rect);
 }
+
 
 void Level::levelRenderer()
 {
@@ -49,9 +64,18 @@ void Level::levelRenderer()
 				//Block attributes, color and so on
 				tileBlock(139, 69, 19);
 			}
-			 //std::cout << m_x << "," << m_y << std::endl;
+			if (m_gridLayout[i][j] == 'E')
+			{
+				//Block attributes, color and so on
+				tileBlock(200, 99, 79);
+			}
+			//std::cout << m_x << "," << m_y << std::endl;
 		}
 	}
+}
+
+void Level::getTile(int, int)
+{
 }
 
 void Level::levelData(SDL_Renderer* renderer)
@@ -67,7 +91,7 @@ void Level::levelData(SDL_Renderer* renderer)
 	m_gridLayout.push_back("......W");
 	m_gridLayout.push_back("......W");
 	m_gridLayout.push_back("......W");
-	m_gridLayout.push_back("......W");
+	m_gridLayout.push_back("W.....E");
 	m_gridLayout.push_back("FFFFFFF");
 	m_gridLayout.push_back("FFFFFFF");
 }

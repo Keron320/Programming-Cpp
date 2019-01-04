@@ -6,6 +6,19 @@
 #include "input.h"
 #include <conio.h>
 
+//-----------------------------------------------------------------------------
+//
+// Copyright (C) Keron Sepp 2018-2019
+// 
+//
+//
+//
+//
+// DESCRIPTION:  Main where the game is put together
+//
+//-----------------------------------------------------------------------------
+
+
 int main()
 {
 	int R = 0, G = 0, B = 0;
@@ -14,6 +27,7 @@ int main()
 	bool maxReached = false;
 	Game2* game  = new Game2(); //Create a new game object
 	Input* input = new Input();
+	game->CreateTimerEvent();
 
 	if (game && input)
 	{
@@ -27,7 +41,7 @@ int main()
 		int selectedOption = 1;
 
 		
-		game->CreateTimerEvent();
+		//game->CreateTimerEvent();
 
 		//declare and init variables used for colour of the background
 		Uint8 r = 51, g = 171, b = 249, a = 255;
@@ -36,7 +50,7 @@ int main()
 
 		while (exitGame != true)
 		{
-			//pdate the game			
+			//Update the game			
 			game->displayMainMenu(selectedOption);
 
 			//Get input
@@ -107,6 +121,11 @@ int main()
 					if (input->KeyIsPressed(KEY_UP))
 					{
 						game->moveUp();
+					}
+					if (input->KeyIsPressed(KEY_ESCAPE))
+					{
+						//Exit the game
+						menu = true;
 					}
 
 					//go back to menu and highlight new game when escape is pressed

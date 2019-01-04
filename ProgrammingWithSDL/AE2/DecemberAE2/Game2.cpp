@@ -2,8 +2,20 @@
 #include "input.h"
 #include <stdio.h>
 #include "Bitmap.h"
+#include "Creature.h"
 #include "Level.h"
 
+//-----------------------------------------------------------------------------
+//
+// Copyright (C) Keron Sepp 2018-2019
+// 
+//
+//
+//
+//
+// DESCRIPTION:  Game window and overal setup
+//
+//-----------------------------------------------------------------------------
 
 void Game2::UpdateText(std::string msg, int x, int y, TTF_Font * font, SDL_Color colour)
 {
@@ -56,13 +68,13 @@ Game2::Game2()
 {
 	m_Window = nullptr;
 	m_Renderer = nullptr;
-	
 
-//	// start up
+
+	//	// start up
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS);
-	TTF_Init(); 
+	TTF_Init();
 
-				// create the window
+	// create the window
 	m_Window = SDL_CreateWindow(
 		"My First window", // title
 		250,	//initial x pos
@@ -93,36 +105,37 @@ Game2::Game2()
 		getchar();
 	}
 
+	m_level = new Level(m_Renderer); //I moved this here
 
-	// New Stuff Bitmaps
-	m_monster = new Bitmap(m_Renderer, "assets/monster.bmp", 100, 100); // 04-01
-	m_monsterTrans = new Bitmap(m_Renderer, "assets/monsterTrans.bmp", 200, 100); // 04-01
-	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 100, true); // 04-01
+									 // New Stuff Bitmaps
+									 //m_monster = new Bitmap(m_Renderer, "assets/monster.bmp", 50, 50); // Remove from screen for now
+									 //m_monsterTrans = new Bitmap(m_Renderer, "assets/monsterTrans.bmp", 50, 100); // Remove from screen for now
+	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 100, 328, CCollisionRectangle(100, 328, 30, 30), m_level, true); // 04-01
+	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 30), m_level, true); // 04-01
 
-
-	// Menubars
-	m_menuBarHL1 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 100, true);
-	m_menuBarHL2 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 200, true);
-	m_menuBarHL3 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 300, true);
-	m_menuBar1 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 100, true);
-	m_menuBar2 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 200, true);
-	m_menuBar3 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 300, true);
-	m_Panel = new Bitmap(m_Renderer, "assets/Panel.bmp", 100, 50, true);
-	m_level = new Level(m_Renderer);
-	
+																																				// Menubars
+	m_menuBarHL1 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 100, CCollisionRectangle(), m_level, true);
+	m_menuBarHL2 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 200, CCollisionRectangle(), m_level, true);
+	m_menuBarHL3 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 300, CCollisionRectangle(), m_level, true);
+	m_menuBar1 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 100, CCollisionRectangle(), m_level, true);
+	m_menuBar2 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 200, CCollisionRectangle(), m_level, true);
+	m_menuBar3 = new Bitmap(m_Renderer, "assets/MenuBar.bmp", 100, 300, CCollisionRectangle(), m_level, true);
+	m_Panel = new Bitmap(m_Renderer, "assets/Panel.bmp", 100, 50, CCollisionRectangle(), m_level, true);
+	//m_level init was here
 
 	// start up
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS);
-	
+
 	//read in the font
 	m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf", 15); // 04-02
 	m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf", 50); // 04-02
 
-	//FPS things
-
+															//FPS things
 	m_updateLogic = true;
 	m_renderFrame = true;
 	m_consecutiveLogicUpdates = 0;
+
+
 }
 
 
@@ -207,32 +220,144 @@ void Game2::Update(void)
 {
 	CheckEvents();
 
+	if (m_monsterTransKeyed->isColliding(m_enemyTransKeyed->GetCollisionRect()))
+	{
+		std::cout << "player touches enemy" << std::endl;
+		playerDead = true;
+	}
+
+	//Get the positions of each element
+	for (size_t y = 0; y < m_level->GetTiles().size(); y++)
+	{
+		for (int x = 0; x < m_level->GetTiles()[y].length(); x++)
+		{				
+			CCollisionRectangle* tileRect = m_level->GetTileRect(x, y);
+			if (m_level->GetTiles()[y][x] == 'W')
+			{
+				// Player hits the wall
+				if (m_monsterTransKeyed->isColliding(*tileRect))
+				{
+					std::cout << "Monster hit walls" << std::endl;
+				}
+
+
+				if (m_enemyTransKeyed->isColliding(*tileRect) && walkDir == false)
+				{
+					
+					std::cout << "enemy touch wallsTRUE";
+					walkDir = true;
+				}
+
+				else if (m_enemyTransKeyed->isColliding(*tileRect) && walkDir == true)
+				{
+
+					std::cout << "enemy touch wallsFALSE";
+					walkDir = false;
+				}
+			}
+
+
+			else if (m_level->GetTiles()[y][x] == 'F')
+			{
+			//// Player hits the floor
+				if (m_monsterTransKeyed->isColliding(*tileRect))
+				{
+					m_monsterTransKeyed->moveUp();
+					std::cout << "Player hit floor" << std::endl;
+				}
+			}
+
+			else if (m_level->GetTiles()[y][x] == 'E')
+			{
+				// Player hits the exit
+				if (m_monsterTransKeyed->isColliding(*tileRect))
+				{
+					playerWin = true;
+				}
+
+
+				if (m_enemyTransKeyed->isColliding(*tileRect) && walkDir == false)
+				{
+
+					std::cout << "enemy touch wallsTRUE";
+					walkDir = true;
+				}
+
+				else if (m_enemyTransKeyed->isColliding(*tileRect) && walkDir == true)
+				{
+
+					std::cout << "enemy touch wallsFALSE";
+					walkDir = false;
+				}
+			}
+		}
+	}
+
+	if (walkDir == false)
+	{
+		m_enemyTransKeyed->enemyMovePatternLeft();
+	}
+
+	else if (walkDir == true)
+	{
+		m_enemyTransKeyed->enemyMovePatternRight();
+	}
+
+
 	SDL_SetRenderDrawColor(m_Renderer, 86, 171, 255, 255);
 
-	//wipe the display to the current set colour
+	//wipe the display to the current set colours
 	SDL_RenderClear(m_Renderer);
 
 	//show our bitmaps
 	//Draw takes argument to scale x and y
-	m_monster->draw(1, 1);
-	m_monsterTransKeyed->draw(2, 2);
-	m_monsterTrans->draw(1, 1);
-	   
-	UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
-	UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
 
-	char char_array[] = "Big White";
-	UpdateText(char_array, 50, 140, m_pBigFont, { 255,255,255 });
+	if (playerDead != true)
+	{
+	m_monsterTransKeyed->draw(2, 2); // Stop drawing the player if playerdead is true
+	}
 
-	std::string myString = "Big Green";
-	UpdateText(myString, 50, 70, m_pBigFont, { 0,255,0 });
+	else {
+		std::string myString = "You died!";
+		UpdateText(myString, 10, 20, m_pBigFont, { 255,255,255 });
 
-	//testString += to_string(testNumber);
-	//UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
-	
-	//pause for 1/60th sec
-	//SDL_Delay(16); // Delay for 16 millisec
-	
+		std::string myString2 = "Press Escape to return";
+		UpdateText(myString2, 10, 70, m_pBigFont, { 255,255,255 });
+
+		std::string myString3 = "to menu menu.";
+		UpdateText(myString3, 10, 120, m_pBigFont, { 255,255,255 });
+
+	}
+
+	if (playerWin != true)
+	{
+		m_enemyTransKeyed->draw(2, 2); // Stop drawing the enemy if playerWin is true
+	}
+
+	else {
+		std::string myString = "You Won!!";
+		UpdateText(myString, 10, 20, m_pBigFont, { 255,255,255 });
+
+		std::string myString2 = "Press Escape to return";
+		UpdateText(myString2, 10, 70, m_pBigFont, { 255,255,255 });
+
+		std::string myString3 = "to menu menu.";
+		UpdateText(myString3, 10, 120, m_pBigFont, { 255,255,255 });
+
+	}
+
+
+
+
+
+	//UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
+	//UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
+
+	//char char_array[] = "Big White";
+	//UpdateText(char_array, 50, 140, m_pBigFont, { 255,255,255 });
+
+
+
 	//Display level
 	m_level->levelRenderer();
 
@@ -293,7 +418,7 @@ void Game2::displayMainMenu(int menuOption)
 
 
 	//showDrawing
-	SDL_Delay(100); // Delay for 16 millisec
+	//SDL_Delay(100); // Delay for 16 millisec
 	SDL_RenderPresent(m_Renderer);
 }
 
@@ -321,20 +446,11 @@ void Game2::SetDisplayColour(int R, int		G, int B, int A)
 	}
 }
 
-void Game2::getPos()
-{
-}
-
-void Game2::setPos()
-{
-	//m_monster->setPos();
-}
-
 //Movement
 void Game2::moveLeft()
 {
-	//m_monster->moveLeft();
 	m_monsterTransKeyed->moveLeft();
+
 }
 
 void Game2::moveRight()
@@ -352,6 +468,7 @@ void Game2::moveDown()
 {
 	m_monsterTransKeyed->moveDown();
 }
+
 
 void Game2::CheckEvents()
 {

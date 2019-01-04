@@ -3,28 +3,42 @@
 #include <SDL.h>
 #include "SDL_ttf.h"
 #include <stdio.h>
+#include "Bitmap.h"
+#include "Level.h"
 
+//-----------------------------------------------------------------------------
+//
+// Copyright (C) Keron Sepp 2018-2019
+// 
+//
+//
+//
+//
+// DESCRIPTION:
+//
+//-----------------------------------------------------------------------------
 
-struct SDL_Window;
-struct SDL_Renderer;
-class Bitmap;
-class Level;
+//struct SDL_Window;
+//struct SDL_Renderer;
+//class Bitmap;
+//class Level;
 
 class Game2
 {
 private:
 	//SDL Stuff
-	SDL_Window * m_Window;
+	SDL_Window		* m_Window;
 	SDL_Renderer	*m_Renderer;
 	SDL_Event		event;
 
 	bool			m_running;
 
 	//Bitmaps
-	Bitmap* m_monster; // 04-01
-	Bitmap* m_monsterTrans; // 04-01
-	Bitmap* m_monsterTransKeyed; // 04-01
-								 //Menu buttons
+	Bitmap* m_monster;
+	Bitmap* m_monsterTrans;
+	Bitmap* m_monsterTransKeyed;
+	Bitmap* m_enemyTransKeyed; 
+	//Menu buttons
 	Bitmap* m_menuBar1;
 	Bitmap* m_menuBar2;
 	Bitmap* m_menuBar3;
@@ -47,6 +61,10 @@ public:
 	Game2();
 	~Game2();
 
+	bool walkDir = false;
+	bool playerDead = false;
+	bool playerWin = false;
+
 	int xposition = 100;
 	int yposition = 100;
 
@@ -60,10 +78,6 @@ public:
 	void displayMainMenu(int menuOption);
 
 	void SetDisplayColour(int R, int G, int B, int A);
-
-	// To obtain the bitmap position and to set one
-	void getPos();
-	void setPos();
 
 	//Bitmap control
 	void moveLeft();
@@ -87,9 +101,7 @@ public:
 
 	void CheckEvents();
 
-	//Level stuff
-	void levelDisplay();
-
+	
 
 };
 

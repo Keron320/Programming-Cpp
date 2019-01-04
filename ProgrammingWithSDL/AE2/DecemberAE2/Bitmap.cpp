@@ -1,14 +1,35 @@
 #include "Bitmap.h"
 #include "SDL.h"
 #include "SDL_render.h"
+#include "Level.h"
+#include "Game2.h"
 #include <string>
 
 using namespace std;
 
+//-----------------------------------------------------------------------------
+//
+// Copyright (C) Keron Sepp 2018-2019
+// 
+//
+//
+//
+//
+// DESCRIPTION:  Loading bitmaps
+//
+//-----------------------------------------------------------------------------
 
-Bitmap::Bitmap(SDL_Renderer* renderer, string fileName, int xpos, int ypos, bool useTransparency)
+
+
+Bitmap::Bitmap()
+{
+}
+
+Bitmap::Bitmap(SDL_Renderer* renderer, string fileName, int xpos, int ypos, CCollisionRectangle passed_CollisionRect, Level* passed_level, bool useTransparency)
 {
 
+	level = passed_level;
+	CollisionRect = passed_CollisionRect;
 	// Store renderer for future confiq and drawing
 	m_pRenderer = renderer;
 
@@ -67,33 +88,77 @@ void Bitmap::draw(int m_scaleX, int m_scaleY)
 		SDL_Rect destRect = { m_x, m_y, m_pbitmapSurface->w*scalerX, m_pbitmapSurface->h*scalerY };
 		SDL_RenderCopy(m_pRenderer, m_pbitmapTexture, NULL, &destRect);
 
-	}
+	} 
+
 }
 
-void Bitmap::setPos()
+//Set the starting position of the sprite
+void Bitmap::setPos(int x, int y)
 {
-	// m_x = m_x + 10;
+	m_x = x;
+	m_y = y;
 }
 
 //Move bitmap Left
 void Bitmap::moveLeft()
 {
-	m_x = m_x - 1;
+	m_x = m_x - 15;
+	CollisionRect.SetRectangle(m_x, m_y, CollisionRect.GetRectangle().w, CollisionRect.GetRectangle().h);
 }
 
 //Move bitmap Right
 void Bitmap::moveRight()
 {
-	m_x = m_x + 1;
+	m_x = m_x + 15;
+	CollisionRect.SetRectangle(m_x, m_y, CollisionRect.GetRectangle().w, CollisionRect.GetRectangle().h);
 }
 //Move bitmap Down
 void Bitmap::moveDown()
 {
-	m_y = m_y + 1;
+	m_y = m_y + 15;
+	CollisionRect.SetRectangle(m_x, m_y, CollisionRect.GetRectangle().w, CollisionRect.GetRectangle().h);
+
+
 }
+
+void Bitmap::enemyMovePatternLeft()
+{
+	m_x = m_x - 1;
+	CollisionRect.SetRectangle(m_x, m_y, CollisionRect.GetRectangle().w, CollisionRect.GetRectangle().h);
+}
+
+void Bitmap::enemyMovePatternRight()
+{
+	m_x = m_x + 1;
+	CollisionRect.SetRectangle(m_x, m_y, CollisionRect.GetRectangle().w, CollisionRect.GetRectangle().h);
+}
+
 //Move bitmap Up
 void Bitmap::moveUp()
 {
-	m_y = m_y - 1;
+	m_y = m_y - 15;
+	CollisionRect.SetRectangle(m_x, m_y, CollisionRect.GetRectangle().w, CollisionRect.GetRectangle().h);
+}
+int Bitmap::levelXpos()
+{
+	return m_x;
+
 }
 
+int Bitmap::levelYpos()
+{
+	return m_y;
+}
+
+
+
+bool Bitmap::isColliding(CCollisionRectangle theCollider)
+{
+	std::cout << CollisionRect.GetRectangle().x << "," << CollisionRect.GetRectangle().y << "," << CollisionRect.GetRectangle().w << "," << CollisionRect.GetRectangle().h << endl;
+	std::cout << theCollider.GetRectangle().x << "," << theCollider.GetRectangle().y << "," << theCollider.GetRectangle().w << "," << theCollider.GetRectangle().h << endl;
+
+	return !(CollisionRect.GetRectangle().x + CollisionRect.GetRectangle().w < theCollider.GetRectangle().x ||
+		CollisionRect.GetRectangle().y + CollisionRect.GetRectangle().h < theCollider.GetRectangle().y || //I added ()'s
+		CollisionRect.GetRectangle().x > theCollider.GetRectangle().x + theCollider.GetRectangle().w ||
+		CollisionRect.GetRectangle().y > theCollider.GetRectangle().y + theCollider.GetRectangle().h); //I added ()'s
+}

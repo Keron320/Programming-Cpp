@@ -1,23 +1,35 @@
 #include "Input.h"
-
+//-----------------------------------------------------------------------------
+//
+// Copyright (C) Keron Sepp 2018-2019
+// 
+//
+//
+//
+//
+// DESCRIPTION:  Input setup
+//
+//-----------------------------------------------------------------------------
 
 
 void Input::Update(void)
 {
+	// Initializing value so the program wont do it randomly
+	m_keysPressed[KEY_ESCAPE] = false;
+	m_keysPressed[KEY_R] = false;
+	m_keysPressed[KEY_G] = false;
+	m_keysPressed[KEY_B] = false;
+	m_keysPressed[KEY_LEFT] = false;
+	m_keysPressed[KEY_RIGHT] = false;
+	m_keysPressed[KEY_UP] = false;
+	m_keysPressed[KEY_DOWN] = false;
+	m_keysPressed[KEY_RETURN] = false;
+
 	while (SDL_PollEvent(&m_event) != NULL)
 	{
 		//got an event. Let's Proccess it
 
-		// Initializing value so the program wont do it randomly
-			m_keysPressed[KEY_ESCAPE] = false;
-			m_keysPressed[KEY_R] = false;
-			m_keysPressed[KEY_G] = false;
-			m_keysPressed[KEY_B] = false;
-			m_keysPressed[KEY_LEFT] = false;
-			m_keysPressed[KEY_RIGHT] = false;
-			m_keysPressed[KEY_UP] = false;
-			m_keysPressed[KEY_DOWN] = false;
-			m_keysPressed[KEY_RETURN] = false;
+
 
 			//check for keydown
 		if (m_event.type == SDL_KEYDOWN)
