@@ -73,7 +73,10 @@ public:
 
 	void CreateTimerEvent();
 
+	//Running the game stuff
 	void Update(void);
+	void newGame();
+
 	// Function to only display the main menu
 	void displayMainMenu(int menuOption);
 

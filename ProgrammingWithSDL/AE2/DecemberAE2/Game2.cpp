@@ -26,11 +26,6 @@ void Game2::UpdateText(std::string msg, int x, int y, TTF_Font * font, SDL_Color
 	int texW = 0;
 	int texH = 0;
 
-	//SDL_Color color { 0,0,0 };
-
-	//char msg[100]
-	//sprintf_s(msg, "Checks: %d", m_checkTally);
-
 	surface = TTF_RenderText_Solid(font, msg.c_str(), colour);
 	if (!surface)
 	{
@@ -107,13 +102,14 @@ Game2::Game2()
 
 	m_level = new Level(m_Renderer); //I moved this here
 
-									 // New Stuff Bitmaps
-									 //m_monster = new Bitmap(m_Renderer, "assets/monster.bmp", 50, 50); // Remove from screen for now
-									 //m_monsterTrans = new Bitmap(m_Renderer, "assets/monsterTrans.bmp", 50, 100); // Remove from screen for now
+	// New Stuff Bitmaps
+	//m_monster = new Bitmap(m_Renderer, "assets/monster.bmp", 50, 50); // Remove from screen for now
+	//m_monsterTrans = new Bitmap(m_Renderer, "assets/monsterTrans.bmp", 50, 100); // Remove from screen for now
+
 	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 100, 328, CCollisionRectangle(100, 328, 30, 30), m_level, true); // 04-01
 	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 30), m_level, true); // 04-01
 
-																																				// Menubars
+	// Menubars
 	m_menuBarHL1 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 100, CCollisionRectangle(), m_level, true);
 	m_menuBarHL2 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 200, CCollisionRectangle(), m_level, true);
 	m_menuBarHL3 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 300, CCollisionRectangle(), m_level, true);
@@ -130,12 +126,10 @@ Game2::Game2()
 	m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf", 15); // 04-02
 	m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf", 50); // 04-02
 
-															//FPS things
+	//FPS things
 	m_updateLogic = true;
 	m_renderFrame = true;
 	m_consecutiveLogicUpdates = 0;
-
-
 }
 
 
@@ -312,12 +306,12 @@ void Game2::Update(void)
 	//show our bitmaps
 	//Draw takes argument to scale x and y
 
-	if (playerDead != true)
+	if (playerDead == false)
 	{
 	m_monsterTransKeyed->draw(2, 2); // Stop drawing the player if playerdead is true
 	}
 
-	else {
+	else if (playerDead == true) {
 		std::string myString = "You died!";
 		UpdateText(myString, 10, 20, m_pBigFont, { 255,255,255 });
 
@@ -329,12 +323,13 @@ void Game2::Update(void)
 
 	}
 
-	if (playerWin != true)
+	if (playerWin == false)
 	{
 		m_enemyTransKeyed->draw(2, 2); // Stop drawing the enemy if playerWin is true
 	}
 
-	else {
+	else if (playerWin == true)
+	{
 		std::string myString = "You Won!!";
 		UpdateText(myString, 10, 20, m_pBigFont, { 255,255,255 });
 
@@ -364,6 +359,20 @@ void Game2::Update(void)
 	////showDrawing
 	SDL_RenderPresent(m_Renderer);
 
+
+}
+
+void Game2::newGame()
+{
+	//Reset the player and enemy placement
+	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 100, 328, CCollisionRectangle(100, 328, 30, 30), m_level, true); // 04-01
+	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 30), m_level, true); // 04-01
+
+
+	//Reset the booleans
+	walkDir = false;
+	playerDead = false;
+	playerWin = false;
 
 }
 
@@ -440,9 +449,6 @@ void Game2::SetDisplayColour(int R, int		G, int B, int A)
 
 		//Show what we've drawn
 		SDL_RenderPresent(m_Renderer);
-
-		//Pause for 5 sec
-		//SDL_Delay(100); //Delay takes millisecs
 	}
 }
 

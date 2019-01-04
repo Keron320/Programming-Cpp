@@ -57,6 +57,8 @@ public:
 	int levelXpos();
 	int levelYpos();
 
+
+
 	bool isColliding(CCollisionRectangle theCollider);
 
 	CCollisionRectangle GetCollisionRect()

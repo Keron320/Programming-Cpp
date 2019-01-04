@@ -17,6 +17,7 @@ public:
 		return CollisionRect;
 	}
 
+	void setCollision(int, int);
 
 private:
 	SDL_Rect CollisionRect;

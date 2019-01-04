@@ -44,7 +44,7 @@ int main()
 		//game->CreateTimerEvent();
 
 		//declare and init variables used for colour of the background
-		Uint8 r = 51, g = 171, b = 249, a = 255;
+		Uint8 r = 139, g = 69, b = 19, a = 255;
 		game->SetDisplayColour(r, g, b, a); // set our colour
 
 
@@ -55,6 +55,7 @@ int main()
 
 			//Get input
 			input->Update();
+			
 
 			if (input->KeyIsPressed(KEY_DOWN))
 			{
@@ -86,6 +87,7 @@ int main()
 					case 1: {
 					// Exit the loop to start the game loop
 						menu = false;
+						game->newGame();
 						break;
 					}
 					case 2: {

@@ -117,8 +117,6 @@ void Bitmap::moveDown()
 {
 	m_y = m_y + 15;
 	CollisionRect.SetRectangle(m_x, m_y, CollisionRect.GetRectangle().w, CollisionRect.GetRectangle().h);
-
-
 }
 
 void Bitmap::enemyMovePatternLeft()
@@ -149,7 +147,6 @@ int Bitmap::levelYpos()
 {
 	return m_y;
 }
-
 
 
 bool Bitmap::isColliding(CCollisionRectangle theCollider)

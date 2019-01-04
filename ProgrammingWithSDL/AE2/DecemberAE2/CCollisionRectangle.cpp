@@ -24,9 +24,12 @@ CCollisionRectangle::CCollisionRectangle(int x, int y, int w, int h)
 }
 
 
+
 CCollisionRectangle::~CCollisionRectangle()
 {
+
 }
+
 
 void CCollisionRectangle::SetRectangle(int x, int y, int w, int h)
 {
@@ -34,6 +37,12 @@ void CCollisionRectangle::SetRectangle(int x, int y, int w, int h)
 	CollisionRect.y = y;
 	CollisionRect.w = w;
 	CollisionRect.h = h;
+}
+
+void CCollisionRectangle::setCollision(int x, int y)
+{
+	CollisionRect.x = x;
+	CollisionRect.y = y;
 }
 
 
