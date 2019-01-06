@@ -103,7 +103,7 @@ Game2::Game2()
 	m_level = new Level(m_Renderer); //I moved this here
 
 	//Bitmaps
-	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 100, 328, CCollisionRectangle(100, 328, 30, 30), m_level, true);
+	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 110, 328, CCollisionRectangle(110, 328, 30, 30), m_level, true);
 	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monster.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 30), m_level, true);
 	m_coin = new Bitmap(m_Renderer, "assets/coin.bmp", 400, 200, CCollisionRectangle(400, 200, 30, 30), m_level, true);
 
@@ -277,7 +277,7 @@ void Game2::Update(void)
 						//wallHitDown = true;
 						//moveUp();
 
-						std::cout << "falling";
+						//std::cout << "falling";
 					}
 				}
 
@@ -422,8 +422,8 @@ void Game2::Update(void)
 		maxHeigth = (m_monsterTransKeyed->getPosY() - 150); // 240
 		jumpStarted = true;
 		falling = false;
-		std::cout << playerjumpStart << std::endl;
-		std::cout << maxHeigth << std::endl;
+		//std::cout << playerjumpStart << std::endl;
+		//std::cout << maxHeigth << std::endl;
 	}
 
 	// Player jumping
@@ -468,8 +468,8 @@ void Game2::Update(void)
 void Game2::newGame()
 {
 	//Reset the player and enemy placement
-	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 100, 328, CCollisionRectangle(100, 328, 30, 72), m_level, true); // 04-01
-	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monster.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 72), m_level, true); // 04-01
+	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 110, 328, CCollisionRectangle(110, 328, 30, 72), m_level, true);
+	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monster.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 72), m_level, true);
 	m_coin = new Bitmap(m_Renderer, "assets/coin.bmp", 400, 200, CCollisionRectangle(400, 200, 30, 30), m_level, true);
 
 	//Reset the booleans
@@ -480,6 +480,7 @@ void Game2::newGame()
 	playerJump = false;
 	falling = false;
 	scoreItem = false;
+	score = 0;
 
 }
 

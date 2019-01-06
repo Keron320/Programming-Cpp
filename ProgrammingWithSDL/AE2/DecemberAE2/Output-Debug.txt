@@ -1,11 +1,13 @@
-﻿'Keron_Sepp_SDL_Default.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\winmmbase.dll'
+﻿'Keron_Sepp_SDL_Default.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\msvcp140.dll'
+'Keron_Sepp_SDL_Default.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\winmmbase.dll'
+'Keron_Sepp_SDL_Default.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\winmmbase.dll'
 'Keron_Sepp_SDL_Default.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\WinTypes.dll'
 'Keron_Sepp_SDL_Default.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\igdumd32.dll'
 'Keron_Sepp_SDL_Default.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\ResourcePolicyClient.dll'
-The thread 0x3174 has exited with code -1073741510 (0xc000013a).
-The thread 0x42a4 has exited with code -1073741510 (0xc000013a).
-The thread 0x2fdc has exited with code -1073741510 (0xc000013a).
-The thread 0x2504 has exited with code -1073741510 (0xc000013a).
-The thread 0x309c has exited with code -1073741510 (0xc000013a).
-The thread 0x2880 has exited with code -1073741510 (0xc000013a).
-The program '[1404] Keron_Sepp_SDL_Default.exe' has exited with code -1073741510 (0xc000013a).
+The thread 0x2b80 has exited with code -1073741510 (0xc000013a).
+The thread 0x4368 has exited with code -1073741510 (0xc000013a).
+The thread 0x21b0 has exited with code -1073741510 (0xc000013a).
+The thread 0x18a8 has exited with code -1073741510 (0xc000013a).
+The thread 0xda4 has exited with code -1073741510 (0xc000013a).
+The thread 0x928 has exited with code -1073741510 (0xc000013a).
+The program '[11384] Keron_Sepp_SDL_Default.exe' has exited with code -1073741510 (0xc000013a).
