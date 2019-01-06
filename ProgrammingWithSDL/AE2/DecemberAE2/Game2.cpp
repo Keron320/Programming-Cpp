@@ -103,8 +103,9 @@ Game2::Game2()
 	m_level = new Level(m_Renderer); //I moved this here
 
 	//Bitmaps
-	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 100, 328, CCollisionRectangle(100, 328, 30, 30), m_level, true); // 04-01
-	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monster.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 30), m_level, true); // 04-01
+	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 100, 328, CCollisionRectangle(100, 328, 30, 30), m_level, true);
+	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monster.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 30), m_level, true);
+	m_coin = new Bitmap(m_Renderer, "assets/coin.bmp", 400, 200, CCollisionRectangle(400, 200, 30, 30), m_level, true);
 
 	// Menubars
 	m_menuBarHL1 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 100, CCollisionRectangle(), m_level, true);
@@ -145,6 +146,8 @@ Game2::~Game2()
 	}
 
 	//Destroy the bitmaps
+	if (m_coin)
+		delete m_coin;
 
 	if (m_monsterTransKeyed)
 		delete m_monsterTransKeyed;
@@ -213,8 +216,17 @@ void Game2::Update(void)
 
 	if (m_monsterTransKeyed->isColliding(m_enemyTransKeyed->GetCollisionRect()))
 	{
-		std::cout << "player touches enemy" << std::endl;
+		//Debug
+		//std::cout << "player touches enemy" << std::endl;
 		playerDead = true;
+	}
+
+	if (m_monsterTransKeyed->isColliding(m_coin->GetCollisionRect()))
+	{
+		//Debug
+		//std::cout << "player touches enemy" << std::endl;
+		score = score + 1;
+		scoreItem = true;
 	}
 
 	//Get the positions of each element
@@ -229,19 +241,53 @@ void Game2::Update(void)
 				if (m_monsterTransKeyed->isColliding(*tileRect))
 				{
 					//std::cout << "Monster hit walls" << std::endl;
+					// Collision logic
 					if (wallHitLeft == true)
 					{
 						moveRight();
 						wallHitLeft = false;
 						wallHitRight = false;
+						wallHitUp = false;
+						wallHitDown = false;
 					}
 					else if (wallHitRight == true)
 					{
 						moveLeft();
 						wallHitLeft = false;
 						wallHitRight = false;
+						wallHitUp = false;
+						wallHitDown = false;
+					}
+					else if (wallHitUp == true)
+					{
+						moveDown();
+						playerjumpStart = maxHeigth; //Stops the jump when hitting the wall
+						wallHitLeft = false;
+						wallHitRight = false;
+						wallHitUp = false;
+						wallHitDown = false;
+					}
+					else if (wallHitDown == true)
+					{
+						falling = false;
+						moveUp();
+						wallHitLeft = false;
+						wallHitRight = false;
+						wallHitUp = false;
+						//wallHitDown = true;
+						//moveUp();
+
+						std::cout << "falling";
 					}
 				}
+
+				else {
+					//Bad solution for it, but somehow works.
+						falling = true;
+				}
+
+				//if (wallHitDown == false)
+					//falling = true;
 
 				if (m_enemyTransKeyed->isColliding(*tileRect) && walkDir == false)
 				{
@@ -312,11 +358,23 @@ void Game2::Update(void)
 	//show our bitmaps
 	//Draw takes argument to scale x and y
 
+	if (scoreItem == false)
+	{
+		m_coin->draw(3, 3); // Stop drawing the player if playerdead is true
+	}
+
+	else if (scoreItem == true)
+	{
+		m_coin = new Bitmap(m_Renderer, "assets/coin.bmp", 0, 0, CCollisionRectangle(0, 0, 30, 30), m_level, true);
+	}
+
 	if (playerDead == false)
 	{
 	m_monsterTransKeyed->draw(2, 2); // Stop drawing the player if playerdead is true
 
 	}
+
+
 
 	else if (playerDead == true) {
 		std::string myString = "You died!";
@@ -337,7 +395,6 @@ void Game2::Update(void)
 	if (playerWin == false)
 	{
 		m_enemyTransKeyed->draw(2, 2); // Stop drawing the enemy if playerWin is true
-
 	}
 
 	else if (playerWin == true)
@@ -352,7 +409,7 @@ void Game2::Update(void)
 		UpdateText(myString3, 10, 120, m_pBigFont, { 255,255,255 });
 
 		/// Temp fix to make the enemy go away when dead
-		m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 0, 0, CCollisionRectangle(0, 0, 30, 72), m_level, true); // 04-01
+		m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monster.bmp", 0, 0, CCollisionRectangle(0, 0, 30, 72), m_level, true); // 04-01
 	//Causes some symbol error
 	//	if (m_monsterTrans)
 	//		delete m_monsterTrans;
@@ -376,8 +433,9 @@ void Game2::Update(void)
 		falling = false;
 		playerjumpStart = playerjumpStart - speed;
 
-		std::cout << playerjumpStart << std::endl;
-		std::cout << maxHeigth << std::endl;
+		//Debug stuff
+		//std::cout << playerjumpStart << std::endl;
+		//std::cout << maxHeigth << std::endl;
 		// Start falling when player hits maxHeigth
 
 		if (playerjumpStart <= maxHeigth)
@@ -385,7 +443,8 @@ void Game2::Update(void)
 			playerJump = false;
 			jumpStarted = false;
 			falling = true;
-			std::cout << " PLAYERJUMP IS FALSE!!!!!!!! ";
+		//Debug stuff
+		//	std::cout << " PLAYERJUMP IS FALSE!!!!!!!! ";
 		}
 
 	}
@@ -396,18 +455,22 @@ void Game2::Update(void)
 		playerJump = false;
 	}
 
+	std::string myString3 = "Score: " + std::to_string(score);
+	UpdateText(myString3, 500, 10, m_pSmallFont, { 255,255,255 });
+
+
 	////showDrawing
 	SDL_RenderPresent(m_Renderer);
 
-	SDL_Delay(8);
+	SDL_Delay(8); // to prevent the game being too fast
 }
 
 void Game2::newGame()
 {
 	//Reset the player and enemy placement
 	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 100, 328, CCollisionRectangle(100, 328, 30, 72), m_level, true); // 04-01
-	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 72), m_level, true); // 04-01
-
+	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monster.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 72), m_level, true); // 04-01
+	m_coin = new Bitmap(m_Renderer, "assets/coin.bmp", 400, 200, CCollisionRectangle(400, 200, 30, 30), m_level, true);
 
 	//Reset the booleans
 	walkDir = false;
@@ -416,6 +479,7 @@ void Game2::newGame()
 	jumpStarted = false;
 	playerJump = false;
 	falling = false;
+	scoreItem = false;
 
 }
 
@@ -501,6 +565,8 @@ void Game2::moveLeft()
 	m_monsterTransKeyed->moveLeft(speed);
 	wallHitLeft = true;
 	wallHitRight = false;
+	wallHitUp = false;
+	//wallHitDown = false;
 }
 
 void Game2::moveRight()
@@ -508,16 +574,27 @@ void Game2::moveRight()
 	m_monsterTransKeyed->moveRight(speed);
 	wallHitLeft = false;
 	wallHitRight = true;
+	wallHitUp = false;
+	//wallHitDown = false;
+
 }
 
 void Game2::moveUp()
 {
 	m_monsterTransKeyed->moveUp(speed);
+	wallHitLeft = false;
+	wallHitRight = false;
+	wallHitUp = true;
+	//wallHitDown = false;
 }
 
 void Game2::moveDown()
 {
 	m_monsterTransKeyed->moveDown(speed);
+	wallHitLeft = false;
+	wallHitRight = false;
+	wallHitUp = false;
+	wallHitDown = true;
 }
 
 

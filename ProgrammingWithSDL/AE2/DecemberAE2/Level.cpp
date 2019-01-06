@@ -97,9 +97,9 @@ void Level::levelData(SDL_Renderer* renderer)
 
 	//Level Data
 	m_gridLayout.push_back("......W");
-	m_gridLayout.push_back("......W");
 	m_gridLayout.push_back("W.....W");
-	m_gridLayout.push_back("W.....E");
+	m_gridLayout.push_back("W.....W");
+	m_gridLayout.push_back("W...W.E");
 	m_gridLayout.push_back("FFFFFFF");
 	m_gridLayout.push_back("FFFFFFF");
 }

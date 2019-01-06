@@ -46,6 +46,8 @@ private:
 	Bitmap* m_menuBarHL2;
 	Bitmap* m_menuBarHL3;
 	Bitmap* m_Panel;
+	//Coin
+	Bitmap* m_coin;
 
 	//Level
 	Level*	m_level;
@@ -67,6 +69,8 @@ public:
 	bool jumpStarted = false;
 	bool playerJump = false;
 	bool falling = true;
+	bool scoreItem = false;
+
 
 	int xposition = 100;
 	int yposition = 100;
@@ -77,6 +81,9 @@ public:
 	bool wallHitRight;
 	bool wallHitUp;
 	bool wallHitDown;
+	
+
+	int score = 0;
 
 
 	//static callback method
