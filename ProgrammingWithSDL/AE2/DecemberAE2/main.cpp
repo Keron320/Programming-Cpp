@@ -118,11 +118,12 @@ int main()
 					}
 					if (input->KeyIsPressed(KEY_DOWN))
 					{
-						game->moveDown();
+					//	game->moveDown();
 					}
 					if (input->KeyIsPressed(KEY_UP))
 					{
-						game->moveUp();
+						//game->moveUp();
+						game->playerJump = true;
 					}
 					if (input->KeyIsPressed(KEY_ESCAPE))
 					{

@@ -84,10 +84,8 @@ void Bitmap::draw(int m_scaleX, int m_scaleY)
 	//Render the bitmap at the x/y
 	if (m_pbitmapTexture)
 	{
-
 		SDL_Rect destRect = { m_x, m_y, m_pbitmapSurface->w*scalerX, m_pbitmapSurface->h*scalerY };
 		SDL_RenderCopy(m_pRenderer, m_pbitmapTexture, NULL, &destRect);
-
 	} 
 
 }
@@ -100,23 +98,52 @@ void Bitmap::setPos(int x, int y)
 }
 
 //Move bitmap Left
-void Bitmap::moveLeft()
+void Bitmap::moveLeft(int speed)
 {
-	m_x = m_x - 15;
+	m_x = m_x - speed*2;
 	CollisionRect.SetRectangle(m_x, m_y, CollisionRect.GetRectangle().w, CollisionRect.GetRectangle().h);
 }
 
 //Move bitmap Right
-void Bitmap::moveRight()
+void Bitmap::moveRight(int speed)
 {
-	m_x = m_x + 15;
+	m_x = m_x + speed*2;
 	CollisionRect.SetRectangle(m_x, m_y, CollisionRect.GetRectangle().w, CollisionRect.GetRectangle().h);
 }
 //Move bitmap Down
-void Bitmap::moveDown()
+void Bitmap::moveDown(int speed)
 {
-	m_y = m_y + 15;
+	m_y = m_y + speed;
 	CollisionRect.SetRectangle(m_x, m_y, CollisionRect.GetRectangle().w, CollisionRect.GetRectangle().h);
+}
+
+
+void Bitmap::isFalling()
+{
+}
+
+int Bitmap::getPosX()
+{
+	return m_x;
+}
+
+int Bitmap::getPosY()
+{
+	return m_y;
+}
+
+// Set and Get max X
+int Bitmap::getPosXMax(int x)
+{
+	m_x = m_x + x;
+	return m_x;
+}
+
+// Set and Get max Y
+int Bitmap::getPosYMax(int y)
+{
+	m_y = m_y + y;
+	return m_y;
 }
 
 void Bitmap::enemyMovePatternLeft()
@@ -132,9 +159,9 @@ void Bitmap::enemyMovePatternRight()
 }
 
 //Move bitmap Up
-void Bitmap::moveUp()
+void Bitmap::moveUp(int speed)
 {
-	m_y = m_y - 15;
+	m_y = m_y - speed;
 	CollisionRect.SetRectangle(m_x, m_y, CollisionRect.GetRectangle().w, CollisionRect.GetRectangle().h);
 }
 int Bitmap::levelXpos()
@@ -151,8 +178,8 @@ int Bitmap::levelYpos()
 
 bool Bitmap::isColliding(CCollisionRectangle theCollider)
 {
-	std::cout << CollisionRect.GetRectangle().x << "," << CollisionRect.GetRectangle().y << "," << CollisionRect.GetRectangle().w << "," << CollisionRect.GetRectangle().h << endl;
-	std::cout << theCollider.GetRectangle().x << "," << theCollider.GetRectangle().y << "," << theCollider.GetRectangle().w << "," << theCollider.GetRectangle().h << endl;
+	//std::cout << CollisionRect.GetRectangle().x << "," << CollisionRect.GetRectangle().y << "," << CollisionRect.GetRectangle().w << "," << CollisionRect.GetRectangle().h << endl;
+	//std::cout << theCollider.GetRectangle().x << "," << theCollider.GetRectangle().y << "," << theCollider.GetRectangle().w << "," << theCollider.GetRectangle().h << endl;
 
 	return !(CollisionRect.GetRectangle().x + CollisionRect.GetRectangle().w < theCollider.GetRectangle().x ||
 		CollisionRect.GetRectangle().y + CollisionRect.GetRectangle().h < theCollider.GetRectangle().y || //I added ()'s

@@ -19,6 +19,14 @@ Level::Level(SDL_Renderer* renderer)
 	levelData(renderer);
 }
 
+void Level::getData()
+{
+	std::cout << m_x << ":X value" << std::endl;
+	std::cout << m_y << ":Y value" <<std::endl;
+	std::cout << m_blockWidth << ":BW value"<< std::endl;
+	std::cout << m_blockHeight << ":BH value"<< std::endl;
+}
+
 int Level::getHeight()
 {
 	//Get the number of rows in m_gridLayout
@@ -67,7 +75,7 @@ void Level::levelRenderer()
 			if (m_gridLayout[i][j] == 'E')
 			{
 				//Block attributes, color and so on
-				tileBlock(200, 99, 79);
+				tileBlock(200, 150, 79);
 			}
 			//std::cout << m_x << "," << m_y << std::endl;
 		}
@@ -90,7 +98,7 @@ void Level::levelData(SDL_Renderer* renderer)
 	//Level Data
 	m_gridLayout.push_back("......W");
 	m_gridLayout.push_back("......W");
-	m_gridLayout.push_back("......W");
+	m_gridLayout.push_back("W.....W");
 	m_gridLayout.push_back("W.....E");
 	m_gridLayout.push_back("FFFFFFF");
 	m_gridLayout.push_back("FFFFFFF");

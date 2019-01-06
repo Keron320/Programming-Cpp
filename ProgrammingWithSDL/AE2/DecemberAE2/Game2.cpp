@@ -102,12 +102,9 @@ Game2::Game2()
 
 	m_level = new Level(m_Renderer); //I moved this here
 
-	// New Stuff Bitmaps
-	//m_monster = new Bitmap(m_Renderer, "assets/monster.bmp", 50, 50); // Remove from screen for now
-	//m_monsterTrans = new Bitmap(m_Renderer, "assets/monsterTrans.bmp", 50, 100); // Remove from screen for now
-
+	//Bitmaps
 	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 100, 328, CCollisionRectangle(100, 328, 30, 30), m_level, true); // 04-01
-	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 30), m_level, true); // 04-01
+	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monster.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 30), m_level, true); // 04-01
 
 	// Menubars
 	m_menuBarHL1 = new Bitmap(m_Renderer, "assets/MenuBarSelected.bmp", 100, 100, CCollisionRectangle(), m_level, true);
@@ -231,21 +228,32 @@ void Game2::Update(void)
 				// Player hits the wall
 				if (m_monsterTransKeyed->isColliding(*tileRect))
 				{
-					std::cout << "Monster hit walls" << std::endl;
+					//std::cout << "Monster hit walls" << std::endl;
+					if (wallHitLeft == true)
+					{
+						moveRight();
+						wallHitLeft = false;
+						wallHitRight = false;
+					}
+					else if (wallHitRight == true)
+					{
+						moveLeft();
+						wallHitLeft = false;
+						wallHitRight = false;
+					}
 				}
-
 
 				if (m_enemyTransKeyed->isColliding(*tileRect) && walkDir == false)
 				{
 					
-					std::cout << "enemy touch wallsTRUE";
+					//std::cout << "enemy touch wallsTRUE";
 					walkDir = true;
 				}
 
 				else if (m_enemyTransKeyed->isColliding(*tileRect) && walkDir == true)
 				{
 
-					std::cout << "enemy touch wallsFALSE";
+					//std::cout << "enemy touch wallsFALSE";
 					walkDir = false;
 				}
 			}
@@ -256,8 +264,8 @@ void Game2::Update(void)
 			//// Player hits the floor
 				if (m_monsterTransKeyed->isColliding(*tileRect))
 				{
-					m_monsterTransKeyed->moveUp();
-					std::cout << "Player hit floor" << std::endl;
+					falling = false;
+					jumpStarted = false;
 				}
 			}
 
@@ -269,18 +277,14 @@ void Game2::Update(void)
 					playerWin = true;
 				}
 
-
+				// Enemy "A.I"
 				if (m_enemyTransKeyed->isColliding(*tileRect) && walkDir == false)
 				{
-
-					std::cout << "enemy touch wallsTRUE";
 					walkDir = true;
 				}
 
 				else if (m_enemyTransKeyed->isColliding(*tileRect) && walkDir == true)
 				{
-
-					std::cout << "enemy touch wallsFALSE";
 					walkDir = false;
 				}
 			}
@@ -297,11 +301,13 @@ void Game2::Update(void)
 		m_enemyTransKeyed->enemyMovePatternRight();
 	}
 
-
 	SDL_SetRenderDrawColor(m_Renderer, 86, 171, 255, 255);
 
 	//wipe the display to the current set colours
 	SDL_RenderClear(m_Renderer);
+
+	//Display level
+	m_level->levelRenderer();
 
 	//show our bitmaps
 	//Draw takes argument to scale x and y
@@ -309,6 +315,7 @@ void Game2::Update(void)
 	if (playerDead == false)
 	{
 	m_monsterTransKeyed->draw(2, 2); // Stop drawing the player if playerdead is true
+
 	}
 
 	else if (playerDead == true) {
@@ -321,11 +328,16 @@ void Game2::Update(void)
 		std::string myString3 = "to menu menu.";
 		UpdateText(myString3, 10, 120, m_pBigFont, { 255,255,255 });
 
+		//Causes some symbol error
+		//if (m_monsterTransKeyed)
+			//delete m_monsterTransKeyed;
+
 	}
 
 	if (playerWin == false)
 	{
 		m_enemyTransKeyed->draw(2, 2); // Stop drawing the enemy if playerWin is true
+
 	}
 
 	else if (playerWin == true)
@@ -339,40 +351,71 @@ void Game2::Update(void)
 		std::string myString3 = "to menu menu.";
 		UpdateText(myString3, 10, 120, m_pBigFont, { 255,255,255 });
 
+		/// Temp fix to make the enemy go away when dead
+		m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 0, 0, CCollisionRectangle(0, 0, 30, 72), m_level, true); // 04-01
+	//Causes some symbol error
+	//	if (m_monsterTrans)
+	//		delete m_monsterTrans;
+
 	}
 
+	if (jumpStarted == false && playerJump == true && falling == false)
+	{
+		playerjumpStart = m_monsterTransKeyed->getPosY(); //300
+		maxHeigth = (m_monsterTransKeyed->getPosY() - 150); // 240
+		jumpStarted = true;
+		falling = false;
+		std::cout << playerjumpStart << std::endl;
+		std::cout << maxHeigth << std::endl;
+	}
 
+	// Player jumping
+	if (jumpStarted == true)
+	{
+		moveUp();
+		falling = false;
+		playerjumpStart = playerjumpStart - speed;
 
+		std::cout << playerjumpStart << std::endl;
+		std::cout << maxHeigth << std::endl;
+		// Start falling when player hits maxHeigth
 
+		if (playerjumpStart <= maxHeigth)
+		{
+			playerJump = false;
+			jumpStarted = false;
+			falling = true;
+			std::cout << " PLAYERJUMP IS FALSE!!!!!!!! ";
+		}
 
-	//UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
-	//UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
+	}
 
-	//char char_array[] = "Big White";
-	//UpdateText(char_array, 50, 140, m_pBigFont, { 255,255,255 });
-
-
-
-	//Display level
-	m_level->levelRenderer();
+	if (falling == true)
+	{
+		moveDown();
+		playerJump = false;
+	}
 
 	////showDrawing
 	SDL_RenderPresent(m_Renderer);
 
-
+	SDL_Delay(8);
 }
 
 void Game2::newGame()
 {
 	//Reset the player and enemy placement
-	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 100, 328, CCollisionRectangle(100, 328, 30, 30), m_level, true); // 04-01
-	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 30), m_level, true); // 04-01
+	m_monsterTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 100, 328, CCollisionRectangle(100, 328, 30, 72), m_level, true); // 04-01
+	m_enemyTransKeyed = new Bitmap(m_Renderer, "assets/monsterTransKeyed.bmp", 300, 328, CCollisionRectangle(300, 328, 30, 72), m_level, true); // 04-01
 
 
 	//Reset the booleans
 	walkDir = false;
 	playerDead = false;
 	playerWin = false;
+	jumpStarted = false;
+	playerJump = false;
+	falling = false;
 
 }
 
@@ -455,25 +498,28 @@ void Game2::SetDisplayColour(int R, int		G, int B, int A)
 //Movement
 void Game2::moveLeft()
 {
-	m_monsterTransKeyed->moveLeft();
-
+	m_monsterTransKeyed->moveLeft(speed);
+	wallHitLeft = true;
+	wallHitRight = false;
 }
 
 void Game2::moveRight()
 {
-	m_monsterTransKeyed->moveRight();
-
+	m_monsterTransKeyed->moveRight(speed);
+	wallHitLeft = false;
+	wallHitRight = true;
 }
 
 void Game2::moveUp()
 {
-	m_monsterTransKeyed->moveUp();
+	m_monsterTransKeyed->moveUp(speed);
 }
 
 void Game2::moveDown()
 {
-	m_monsterTransKeyed->moveDown();
+	m_monsterTransKeyed->moveDown(speed);
 }
+
 
 
 void Game2::CheckEvents()

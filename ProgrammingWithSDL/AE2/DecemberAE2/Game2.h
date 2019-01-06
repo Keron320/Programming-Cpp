@@ -64,9 +64,20 @@ public:
 	bool walkDir = false;
 	bool playerDead = false;
 	bool playerWin = false;
+	bool jumpStarted = false;
+	bool playerJump = false;
+	bool falling = true;
 
 	int xposition = 100;
 	int yposition = 100;
+	int maxHeigth;
+	int playerjumpStart;
+
+	bool wallHitLeft;
+	bool wallHitRight;
+	bool wallHitUp;
+	bool wallHitDown;
+
 
 	//static callback method
 	static Uint32 TimerCallback(Uint32 interval, void* gameObjectIn);
@@ -87,6 +98,10 @@ public:
 	void moveRight();
 	void moveUp();
 	void moveDown();
+
+	
+	int speed = 2;
+
 
 	//FPS stuff
 	bool		m_updateLogic;

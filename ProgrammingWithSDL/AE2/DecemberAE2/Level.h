@@ -37,6 +37,8 @@ private:
 public:
 	Level(SDL_Renderer* renderer);
 
+	//Debug
+	void getData();
 
 	int getHeight();
 	int getWidth();
