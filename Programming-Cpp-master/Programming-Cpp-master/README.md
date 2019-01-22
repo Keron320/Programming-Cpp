@@ -1,2 +1,0 @@
-# Programming-Cpp
-C++
